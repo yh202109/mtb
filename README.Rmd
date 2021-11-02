@@ -1,0 +1,73 @@
+---
+output: github_document
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+# mtb - Toolkit for time related data presentation and adding colors to Markdown files
+
+<!-- badges: start -->
+[![contributions welcome](man/figures/contributions-welcome-brightgreen.svg)](https://github.com/yh202109/mtb/issues)
+<!-- badges: end -->
+
+This is a collection of functions that can be used in 
+(1) time-related data presentation; 
+(2) components aiding *Markdown* or *R shiny* file editing; 
+(3) aiding figure axis settings
+
+## Installation
+
+You can install the development version of mtb like so:
+
+``` r
+devtools::install_github('yh202109/mtb',ref='main')
+```
+
+## Example - Selecting and Testing Colors
+
+This is a basic example which shows you how to automatically select colors for individual groups by 3 major colors, blue, cyan and orange. The first argument represent group values. The second argument specify the order of $a$ to $g$, the third argument specifies that group $a$ is assigned to the black color, and group $b$ is assigned to the gray color.  
+
+```{r example_color_1}
+library(mtb)
+colvect = color_set_palette(c('a','b','d','c','e','f','g'), c(1,2,4,3,5,6,7),black='a',gray9='b',cols=c('blue', 'cyan','orange'))
+```
+
+This is a basic example which shows you how to quickly test selected colors: 
+```{r example_color_2, out.width='60%'}
+color_test_palette(colvect, type='line')
+color_test_palette(colvect, type='bar')
+```
+
+## Example - *R markdown* or *Shiny* components
+
+This is a basic example which shows you how to format a string:
+
+```{r example_rmd_1}
+add_colored_str('Example - Warning', color=c(255,0,0), bold=TRUE, fontsize=1.5)
+```
+
+This is an example which shows you how to add a default box:
+
+```{r example_rmd_2}
+add_colored_box(info='additional information')
+```
+
+This is an example which shows you how to add a warning box:
+
+```{r example_rmd_3}
+add_colored_box(type='yellow-warning', info='Here is the warning message.')
+```
+
+# Warranty and Disclaimer
+
+```{r, echo=FALSE}
+add_colored_str('THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY.', color=c(0,0,90), bgcolor=c(0,0,25), bold=TRUE)
+```
+

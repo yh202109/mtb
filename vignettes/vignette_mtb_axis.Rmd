@@ -1,0 +1,58 @@
+---
+title: "vignette_axis"
+author: "Y. Hsu"
+date: '`r Sys.Date()`'
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{vignette_axis}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup, echo=FALSE, message=FALSE}
+knitr::opts_chunk$set(tidy=FALSE, comment='#>',fig.align='center', fig.width = 5)
+library(mtb)
+```
+
+## Background
+
+For plots with continuous $x$ values, the x-axis is usually use either linear or log scale. 
+One specific type of data is the $x$ vector is grouped into a smaller number of distinct values.
+In the case that some values jammed together while other values are far away, the plot could have an area that is too overfilled 1to read and also have an area that underused. 
+
+`trans_composition()` transform $x$ values above a breaking point to equal space values and values below the breaking point remain unchanged.  
+
+`r mtb::add_colored_str('Caution - The change of axis scale can be misleading. Use of stretched axis should be noted in the text to avoid misunderstanding.', color='red')`
+
+## How to use
+
+Below is an example of using default continuous axis on data with grouped x values.
+
+```{r}
+library(mtb)
+library(ggplot2)
+pdt=data.frame(x=rep(c(0.5, 1, 10,11.5,12, 100, 300), each=5), gp=rep(seq(1,5),7))
+pdt$y=log10(pdt$x)+rnorm(length(pdt$x))
+p=ggplot(pdt, aes(x=x, y=y, group=gp, color=gp))+geom_point()+geom_line()+
+  theme(
+    panel.grid.major.x=element_line(colour='gray', linetype='dashed'),
+    panel.grid.minor.x=element_line(colour='lightgray',linetype='solid')
+  )
+p
+```
+
+Below is a basic example that shows how to use `trans_composition()`.
+
+```{r}
+t=mtb::trans_composition(pdt$x, nb=30, brk=50, dab=1, dgrd=1, dgrd2=0.25) 
+p+ scale_x_continuous(trans=t)
+
+```
+

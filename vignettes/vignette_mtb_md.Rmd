@@ -1,0 +1,60 @@
+---
+title: "vignette_mtb_markdown"
+author: "Y. Hsu"
+date: '`r Sys.Date()`'
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{vignette_mtb_rmd}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(mtb)
+```
+
+## Background
+
+R Markdown has been popular in many communities for presenting and sharing results. 
+There formatting functions help to emphasis a sentence, or a paragraph.
+`add_colored_str()` adds a inline string with customized styles, including, color, background color and size.
+`add_colored_box()` adds a colored area with title to emphasis a reminder, or a warning.
+
+## How to use
+
+This is a basic example which shows you how to format a string:
+
+```{r example_rmd_1}
+add_colored_str('Example - Warning', color=c(255,0,0), bold=TRUE, fontsize=1.5)
+```
+
+This is an example which shows you how to add a default box:
+
+```{r example_rmd_2}
+add_colored_box(info='additional information')
+```
+
+This is an example which shows you how to add a reminder box:
+
+```{r example_rmd_3}
+add_colored_box(type='green-reminder', info='Here is the reminding message.', width=0.7)
+```
+
+This is an example which shows you how to add a warning box:
+
+```{r example_rmd_4}
+add_colored_box(type='yellow-warning', info='Here is the warning message.', width=0.9)
+```
+
+This is an example which shows you how to add a warning box with stop sign and align to the right:
+
+```{r example_rmd_5}
+add_colored_box(type='red-stop', info='Here is the warning message.', halign='r', width=0.2)
+```
