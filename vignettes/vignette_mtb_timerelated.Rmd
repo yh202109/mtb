@@ -1,0 +1,44 @@
+---
+title: "vignette_mtb_time_related"
+author: "Y. Hsu"
+date: '`r Sys.Date()`'
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{vignette_mtb_time_related}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(mtb)
+```
+
+## Background
+
+It's common to have observations that were measured longitudinally.
+Here are some functions that could present observations measured over time.
+
+
+## How to use
+
+This is a basic example which shows you how to 
+plot intervals of events with group labels at the beginning of individual intervals.
+
+```{r}
+dt = data.frame( id=paste('ID', c(seq(1,5),seq(1,5)),sep=""), idn=c(seq(1,5),seq(1,5)), start=1800*seq(1,10)/3, end=1800*(seq(1,10)/3+seq(2,-2)), label=rep(c('A','B'),5) )
+dt
+```
+
+
+```{r example_color_1, fig.width=7}
+p=time_plot_interval( dt, xlab='Time', ylab='ID', legend_title='Group', arrow_wt=2, arrow_color='gray')
+p 
+```
+

@@ -1,7 +1,7 @@
 Package: mtb
 Type: Package
 Title: Toolkit for Time Related Data Presentation and Adding Colors to Markdown or Shiny 
-Version: 0.1.0
+Version: 0.1.1
 Authors@R: c(
     person("Y", "Hsu", email="yh202109@gmail.com", role=c('aut','cre'))
     )

@@ -1,4 +1,14 @@
-# mtb 0.1.0
+# mtb 0.1.1
+
+## Major changes
+
+* time - Add format converter
+* time - Add interval plot
+* time - Fix interval plot overlapping
+* color - Fix accepting length 9 color strings
+* axis - Fix Inf issue
+
+# mtb 0.1.0 (commit `cb257ea`)
 
 ## Major changes
 

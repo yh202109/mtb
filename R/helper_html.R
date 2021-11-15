@@ -23,13 +23,17 @@
 #'
 #' @param text A string. default="".
 #' @param color One of
-#'   - a color name, e.g. 'red'.
-#'   - a HEX color string, e.g. '#000000' or '#000000FF'.
-#'   - an RGB vector for the color of text
+#' \itemize{
+#'   \item a color name, e.g. 'red'.
+#'   \item a HEX color string, e.g. '#000000' or '#000000FF'.
+#'   \item an RGB vector for the color of text
+#' }
 #' @param bgcolor One of
-#'   - a color name, e.g. 'red'.
-#'   - a HEX color string, e.g. '#000000' or '#000000FF'.
-#'   - an RGB vector for the color of text
+#' \itemize{
+#'   \item a color name, e.g. 'red'.
+#'   \item a HEX color string, e.g. '#000000' or '#000000FF'.
+#'   \item an RGB vector for the color of text
+#' }
 #' @param alpha An integer between 1 and 255 for text alpha. default=255.
 #' @param bgalpha An integer between 1 and 255 for background alpha. default=51.
 #' @param fontsize A real number between 0.5 and 5.0 for font size. default=1.
@@ -93,27 +97,35 @@ add_colored_str <- function(text = "",
 #' @importFrom htmltools tags HTML
 #'
 #' @param type One of:
-#'  - \code{NULL} for no default color or label
-#'  - 'blue-default' for a steel-blue box
-#'  - 'gray-info' for a gray box
-#'  - 'blue-info' for a blue box
-#'  - 'green-remainder' for a green box
-#'  - 'yellow-warning' for a yellow box
-#'  - 'red-stop' for a red box
+#' \itemize{
+#'  \item \code{NULL} for no default color or label
+#'  \item 'blue-default' for a steel-blue box
+#'  \item 'gray-info' for a gray box
+#'  \item 'blue-info' for a blue box
+#'  \item 'green-remainder' for a green box
+#'  \item 'yellow-warning' for a yellow box
+#'  \item 'red-stop' for a red box
+#' }
 #' @param label One of:
-#'  - \code{NULL} for no label if type is NULL or using label set by type
-#'  - A string shown on the top of box
+#' \itemize{
+#'  \item \code{NULL} for no label if type is NULL or using label set by type
+#'  \item A string shown on the top of box
+#' }
 #' @param info A string including the main message of the box
 #' @param bgcolor NA or a length 3 vector with integer elements between 0 to 255
 #' @param width NA or a number between 0.25 to 0.95
 #' @param halign One of:
-#'   - \code{NA} for center aligned
-#'   - 'c' for center aligned
-#'   - 'r' for right aligned
+#' \itemize{
+#'   \item \code{NA} for center aligned
+#'   \item 'c' for center aligned
+#'   \item 'r' for right aligned
+#' }
 #' @param top One of:
-#'   - NA
-#'   - \code{FALSE} for inline
-#'   - \code{TRUE} for top-of-page
+#' \itemize{
+#'   \item NA
+#'   \item \code{FALSE} for inline
+#'   \item \code{TRUE} for top-of-page
+#' }
 #'
 #' @examples
 #' add_colored_box( type='blue-default', info='the document include information regarding...')

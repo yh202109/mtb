@@ -19,16 +19,20 @@ add_colored_str(
 \item{text}{A string. default="".}
 
 \item{color}{One of
-- a color name, e.g. 'red'.
-- a HEX color string, e.g. '#000000' or '#000000FF'.
-- an RGB vector for the color of text}
+\itemize{
+  \item a color name, e.g. 'red'.
+  \item a HEX color string, e.g. '#000000' or '#000000FF'.
+  \item an RGB vector for the color of text
+}}
 
 \item{alpha}{An integer between 1 and 255 for text alpha. default=255.}
 
 \item{bgcolor}{One of
-- a color name, e.g. 'red'.
-- a HEX color string, e.g. '#000000' or '#000000FF'.
-- an RGB vector for the color of text}
+\itemize{
+  \item a color name, e.g. 'red'.
+  \item a HEX color string, e.g. '#000000' or '#000000FF'.
+  \item an RGB vector for the color of text
+}}
 
 \item{bgalpha}{An integer between 1 and 255 for background alpha. default=51.}
 

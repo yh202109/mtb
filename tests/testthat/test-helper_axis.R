@@ -16,27 +16,45 @@
 ############################################################
 
 test_that("function_trans_composition_1", {
-  pdt=data.frame(x=rep(c(0.5, 1, 10,11,12, 100, 1000), each=5))
+  pdt=data.frame(x=rep(c(0.5, 1, 10,11,12, 100, 1000), each=5), x2=rep(c(NA, Inf, 10,11,12, 100, 1000), each=5))
   pdt$y=pdt$x+rnorm(length(pdt$x))
+  pdt$y2=pdt$x2+rnorm(length(pdt$x))
   t=trans_composition(pdt$x,brk=30, dab=3)
+  t_2=trans_composition(pdt$x,brk=1001)
+
   outbr=t$breaks(c(1,2))
   outtr=t$transform(c(-1, 1,15,100,1005))
   outtr2=t$transform(NA)
   outinv=t$inverse(c(-1,1,15,100,1005))
   outinv2=t$inverse(NA)
+  outmb1=t$minor_breaks(NA)
+  outmb2=t$minor_breaks(1)
+  outmb3=t$minor_breaks(c(1,2),c(1,2),1)
 
   expect_equal(t$name, 'composition')
-  expect_equal(outbr, c(1, 10,11,12, 100,1000))
+  expect_equal(outbr, c(1, 10,12, 100,1000))
   expect_equal(outtr, c(-1, 1,15, 18, 21))
   expect_equal(outtr2, (NA))
   expect_equal(outinv, c(-1, 1,15, 1000,1000))
   expect_equal(outinv2, (NA))
+  expect_equal(outmb1, numeric())
+  expect_equal(outmb2, numeric())
+  expect_equal(outmb3, seq(0,15,by=0.5))
+
+  outbr_2=t_2$breaks(c(NA,2))
+  outtr_2=t_2$transform(c(NA,1,Inf,100,1005))
+  outinv_2=t_2$inverse(c(NA,1,Inf,100,1005))
+
+  expect_equal(outbr_2, c(1,100,1000))
+  expect_equal(outtr_2, c(NA,1,Inf,100,1005))
+  expect_equal(outinv_2, c(NA, 1,Inf, 100,1005))
 })
 
 test_that("function_trans_composition_2", {
   pdt=data.frame(x=rep(c(0.5, 1, 10,11,12, 100, 1000), each=5))
   pdt$y=pdt$x+rnorm(length(pdt$x))
   t=trans_composition(pdt$x,brk=1001)
+
   outbr=t$breaks(c(1,2))
   outtr=t$transform(c(-1,1,15,100,1005))
   outtr2=t$transform(NA)

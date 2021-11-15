@@ -28,18 +28,26 @@
 #' @param x A numerical vector used in a plot as (typically) \code{x}
 #' @param nb An integer for the maximum number of breaks. Default=30
 #' @param brk One of
-#'   - A numerical value within \code{range(x)}. All values after the value will be spaced equally
-#'   - \code{NA} or a numerical value that is greater than or equal to \code{max(x)}. All values will be plotted in the original scale
-#'   - A numerical value that is smaller than or equal to \code{max(x)}. All values will be plotted in equal space
+#' \itemize{
+#'   \item A numerical value within \code{range(x)}. All values after the value will be spaced equally
+#'   \item \code{NA} or a numerical value that is greater than or equal to \code{max(x)}. All values will be plotted in the original scale
+#'   \item A numerical value that is smaller than or equal to \code{max(x)}. All values will be plotted in equal space
+#' }
 #' @param dab One of
-#'   - NA for a value calculated automatically
-#'   - A number for the distance after \code{brk}
+#' \itemize{
+#'   \item NA for a value calculated automatically
+#'   \item A number for the distance after \code{brk}
+#' }
 #' @param dgrd One of
-#'   - NA for a value calculated automatically
-#'   - A number for the minimum space between major grids
+#' \itemize{
+#'   \item NA for a value calculated automatically
+#'   \item A number for the minimum space between major grids
+#' }
 #' @param dgrd2 One of
-#'   - NA for a value calculated automatically
-#'   - A number for the minimum space between major grids
+#' \itemize{
+#'   \item NA for a value calculated automatically
+#'   \item A number for the minimum space between major grids
+#' }
 #'
 #' @return A transformation function
 #'
@@ -71,9 +79,9 @@ trans_composition <- function( x=NULL, nb=30, brk=NA, dab=NA, dgrd=NA, dgrd2=NA 
   dab=as.numeric(dab)
   if(is.na(dab)|length(dab)!=1|dab<=0){dab=as.numeric(quantile(diff(xb),0.2))}
   if(is.null(dgrd)|missing(dgrd)){dgrd=NA}
-  if(is.na(dgrd)|length(dgrd)!=1){ if(brk>min(xori)){dgrd=floor((min(max(xori),brk)-min(xori))/24)}else{dgrd=floor(max(xori)-min(xori))/24} }
+  if(is.na(dgrd)|length(dgrd)!=1){ if(brk>min(xori)){dgrd=((min(max(xori),brk)-min(xori))/24)}else{dgrd=((max(xori)-min(xori))/24)} }
   if(is.null(dgrd2)|missing(dgrd2)){dgrd2=NA}
-  if(is.na(dgrd2)|length(dgrd2)!=1){if(brk>min(xori)){dgrd2=floor((min(max(xori),brk)-min(xori))/48)}else{dgrd2=floor((max(xori)-min(xori))/48)}}
+  if(is.na(dgrd2)|length(dgrd2)!=1){if(brk>min(xori)){dgrd2=((min(max(xori),brk)-min(xori))/48)}else{dgrd2=((max(xori)-min(xori))/48)}}
 
   trans=identity_trans()
   trans$name='composition'
@@ -208,18 +216,17 @@ trans_composition <- function( x=NULL, nb=30, brk=NA, dab=NA, dgrd=NA, dgrd2=NA 
     if(sum(!missing(b))==0){ return(numeric())}
     fxl=eval(xb)
     fbrk=eval(brk)
-    if(length(fxl)<2){ return(numeric())}
+    if(length(fxl)<=2){ return(numeric())}
     fd=eval(dgrd2)
     fxlmin=floor(min(fxl))
     fxlmax=ceiling(max(fxl))
     if(max(limits)>fxlmax) fxlmax=ceiling(max(limits))
     if(min(limits)<fxlmax) fxlmin=floor(min(limits))
-    if(fbrk > fxlmin){
-      fxc=min(fxlmax, fbrk)
-    }else{
-      fxc=fxlmax
-    }
-    out1=labeling::extended(fxlmin, fxc, m=max(2,floor(1+(fxc-fxlmin)/fd)))
+    if(fbrk > fxlmin){ fxc=min(fxlmax, fbrk) }else{ fxc=fxlmax }
+    if(is.na(fd)|fd==0|!is.finite(fd)){fd=1}
+    fm=max(2,floor(1+(fxc-fxlmin)/fd))
+    if(is.na(fm)|fm==0|!is.finite(fm)){fm=2}
+    out1=labeling::extended(fxlmin, fxc, m=fm)
     out1
   }
   trans

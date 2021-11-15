@@ -5,6 +5,8 @@
 
 [![contributions
 welcome](man/figures/contributions-welcome-brightgreen.svg)](https://github.com/yh202109/mtb/issues)
+[![Lifecycle:
+experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 <!-- badges: end -->
 
 This is a collection of functions that can be used in (1) time-related
@@ -12,6 +14,12 @@ data presentation; (2) components aiding *Markdown* or *R shiny* file
 editing; (3) aiding figure axis settings
 
 ## Installation
+
+You can install the newest version of mtb like so:
+
+``` r
+install.packages('yh202109/mtb')
+```
 
 You can install the development version of mtb like so:
 

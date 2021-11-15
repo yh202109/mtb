@@ -23,9 +23,11 @@
 #' @param vect A vector for groups.
 #' @param vectn An integer vector with length 0 or with the same length of \code{vect} for order of elements in \code{vect}. default=c()
 #' @param cols One of
-#'   - A color names vector
-#'   - An RGB triplet vector
-#'   - A HEX vector
+#' \itemize{
+#'   \item A color names vector
+#'   \item An RGB triplet vector
+#'   \item A HEX vector
+#' }
 #' @param black A level in \code{vect} that should be assigned to black color. default=""
 #' @param gray9 A level in \code{vect} that should be assigned to gray9 color. default=""
 #'
@@ -81,8 +83,10 @@ color_set_palette = function( vect=c(), vectn=c(), cols=c('blue','cyan','darkora
 #'
 #' @param colvect A vector returned by \code{color_set_palette()}
 #' @param type One of
-#'   - 'line' for using the color vector on a line plot (Default)
-#'   - 'box' for using the color vector on a box plot.
+#' \itemize{
+#'   \item 'line' for using the color vector on a line plot (Default)
+#'   \item 'box' for using the color vector on a box plot.
+#' }
 #'
 #' @return A plot
 #'

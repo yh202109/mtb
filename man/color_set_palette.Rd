@@ -18,9 +18,11 @@ color_set_palette(
 \item{vectn}{An integer vector with length 0 or with the same length of \code{vect} for order of elements in \code{vect}. default=c()}
 
 \item{cols}{One of
-- A color names vector
-- An RGB triplet vector
-- A HEX vector}
+\itemize{
+  \item A color names vector
+  \item An RGB triplet vector
+  \item A HEX vector
+}}
 
 \item{black}{A level in \code{vect} that should be assigned to black color. default=""}
 

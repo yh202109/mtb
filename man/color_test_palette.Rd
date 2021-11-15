@@ -10,8 +10,10 @@ color_test_palette(colvect = c(), type = "line")
 \item{colvect}{A vector returned by \code{color_set_palette()}}
 
 \item{type}{One of
-- 'line' for using the color vector on a line plot (Default)
-- 'box' for using the color vector on a box plot.}
+\itemize{
+  \item 'line' for using the color vector on a line plot (Default)
+  \item 'box' for using the color vector on a box plot.
+}}
 }
 \value{
 A plot

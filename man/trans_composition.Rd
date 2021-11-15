@@ -12,21 +12,29 @@ trans_composition(x = NULL, nb = 30, brk = NA, dab = NA, dgrd = NA, dgrd2 = NA)
 \item{nb}{An integer for the maximum number of breaks. Default=30}
 
 \item{brk}{One of
-- A numerical value within \code{range(x)}. All values after the value will be spaced equally
-- \code{NA} or a numerical value that is greater than or equal to \code{max(x)}. All values will be plotted in the original scale
-- A numerical value that is smaller than or equal to \code{max(x)}. All values will be plotted in equal space}
+\itemize{
+  \item A numerical value within \code{range(x)}. All values after the value will be spaced equally
+  \item \code{NA} or a numerical value that is greater than or equal to \code{max(x)}. All values will be plotted in the original scale
+  \item A numerical value that is smaller than or equal to \code{max(x)}. All values will be plotted in equal space
+}}
 
 \item{dab}{One of
-- NA for a value calculated automatically
-- A number for the distance after \code{brk}}
+\itemize{
+  \item NA for a value calculated automatically
+  \item A number for the distance after \code{brk}
+}}
 
 \item{dgrd}{One of
-- NA for a value calculated automatically
-- A number for the minimum space between major grids}
+\itemize{
+  \item NA for a value calculated automatically
+  \item A number for the minimum space between major grids
+}}
 
 \item{dgrd2}{One of
-- NA for a value calculated automatically
-- A number for the minimum space between major grids}
+\itemize{
+  \item NA for a value calculated automatically
+  \item A number for the minimum space between major grids
+}}
 }
 \value{
 A transformation function

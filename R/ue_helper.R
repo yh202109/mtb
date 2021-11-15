@@ -53,7 +53,7 @@ mtb_color2rgb <- function(str = "", alpha = 255, totri=TRUE, outmaxhue=255, inma
   if ( length(str) == 1) {
     if (is.character(str)) {
       if ((nchar(str) == 9 & grepl("^#[0-9A-Fa-f]{8}$", str))) {
-        alphastr = substr(8,9, str)
+        alphastr = substr(str, 8,9)
         alpha = outmaxhue*as.numeric(as.hexmode(alphastr))/255
         if(outmaxhue!=1){alpha=floor(alpha)}
         str = substr(str, 1,7)
@@ -89,3 +89,14 @@ mtb_color2rgb <- function(str = "", alpha = 255, totri=TRUE, outmaxhue=255, inma
   }
 }
 
+
+############################################################
+mtb_dt_toPOSIXct = function(str, origin='1970-01-01 00:00:00'){
+  em = 'NA introduced'
+  if(is.numeric(str)){
+    tstr=tryCatch(as.POSIXct(str, origin=origin),error=function(r){message(em);return(NA)},warning=function(r){message(em);return(NA)})
+  }else{
+    tstr=tryCatch(as.POSIXct(str, tryFormats=c( "%Y-%m-%d %H:%M:%OS", "%Y/%m/%d %H:%M:%OS", "%Y-%m-%d %H:%M", "%Y/%m/%d %H:%M", "%Y-%m-%d", "%Y/%m/%d", "%H:%M:%OS" ) ),error=function(r){message(em);return(NA)},warning=function(r){message(em);return(NA)})
+  }
+  tstr
+}

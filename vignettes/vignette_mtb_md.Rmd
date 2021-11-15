@@ -4,7 +4,7 @@ author: "Y. Hsu"
 date: '`r Sys.Date()`'
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{vignette_mtb_rmd}
+  %\VignetteIndexEntry{vignette_mtb_markdown}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -23,8 +23,8 @@ library(mtb)
 ## Background
 
 R Markdown has been popular in many communities for presenting and sharing results. 
-There formatting functions help to emphasis a sentence, or a paragraph.
-`add_colored_str()` adds a inline string with customized styles, including, color, background color and size.
+These formatting functions help to emphasis a sentence, or a paragraph.
+`add_colored_str()` adds an inline string with customized styles, including, color, background color and size.
 `add_colored_box()` adds a colored area with title to emphasis a reminder, or a warning.
 
 ## How to use
