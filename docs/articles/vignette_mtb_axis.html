@@ -74,7 +74,7 @@
       <img src="" class="logo" alt=""><h1>vignette_mtb_axis</h1>
                         <h4 data-toc-skip class="author">Y. Hsu</h4>
             
-            <h4 data-toc-skip class="date">2021-12-31</h4>
+            <h4 data-toc-skip class="date">2022-01-01</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/yh202109/mtb/blob/HEAD/vignettes/vignette_mtb_axis.Rmd" class="external-link"><code>vignettes/vignette_mtb_axis.Rmd</code></a></small>
       <div class="d-none name"><code>vignette_mtb_axis.Rmd</code></div>
@@ -100,10 +100,6 @@
 <span class="va">pdt</span><span class="op">$</span><span class="va">y</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log10</a></span><span class="op">(</span><span class="va">pdt</span><span class="op">$</span><span class="va">x</span><span class="op">)</span><span class="op">+</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">pdt</span><span class="op">$</span><span class="va">x</span><span class="op">)</span><span class="op">)</span>
 <span class="va">p</span><span class="op">=</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">pdt</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">x</span>, y<span class="op">=</span><span class="va">y</span>, group<span class="op">=</span><span class="va">gp</span>, color<span class="op">=</span><span class="va">gp</span><span class="op">)</span><span class="op">)</span><span class="op">+</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span><span class="op">)</span><span class="op">+</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span><span class="op">)</span><span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ggtitle</a></span><span class="op">(</span><span class="st">"Purple-Heirloom Tomato Growth Chart"</span><span class="op">)</span>
-  <span class="co">#theme(</span>
-  <span class="co">#  panel.grid.major.x=element_line(colour='gray', linetype='dashed'),</span>
-  <span class="co">#  panel.grid.minor.x=element_line(colour='lightgray',linetype='solid')</span>
-  <span class="co">#)</span>
 <span class="va">p</span></code></pre></div>
 <p><img src="vignette_mtb_axis_files/figure-html/unnamed-chunk-2-1.png" width="672" style="display: block; margin: auto;"></p>
 <p>Below is an example that shows how to use <code><a href="../reference/trans_composition.html">trans_composition()</a></code> with break point set as 50. Distinct <span class="math inline">\(x\)</span> values above 50 are plotted with equal spaces in between.</p>
