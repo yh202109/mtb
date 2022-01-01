@@ -1,24 +1,30 @@
 
-# mtb - Toolkit for time related data presentation and adding colors to Markdown files
+# mtb - Toolkit for Assisting Kitchen and Garden Projects
 
 <!-- badges: start -->
 
-[![contributions
-welcome](man/figures/contributions-welcome-brightgreen.svg)](https://github.com/yh202109/mtb/issues)
+[![CRAN
+status](https://www.r-pkg.org/badges/version/mtb)](https://CRAN.R-project.org/package=mtb)
 [![Lifecycle:
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
+[![contributions
+welcome](man/figures/contributions-welcome-brightgreen.svg)](https://github.com/yh202109/mtb/issues)
 <!-- badges: end -->
 
-This is a collection of functions that can be used in (1) time-related
-data presentation; (2) components aiding *Markdown* or *R shiny* file
-editing; (3) aiding figure axis settings
+This package is one of the author’s weekend projects. The purpose of
+this package is to share a collection of functions for weekend kitchen
+and garden tasks, e.g. making plant growth charts or Thanksgiving oven
+timeline plot, etc. Functions might include but not limited to: (1)
+aiding summarizing time related data; (2) generating axis transformation
+from data; and (3) aiding `Markdown` (with `HTML` output) and `Shiny`
+files editing.
 
 ## Installation
 
 You can install the newest version of mtb like so:
 
 ``` r
-install.packages('yh202109/mtb')
+install.packages('mtb')
 ```
 
 You can install the development version of mtb like so:
@@ -84,4 +90,4 @@ add_colored_box(type='yellow-warning', info='Here is the warning message.')
 
 # Warranty and Disclaimer
 
-<span style="background-color: rgba(0,0,25,0.2); color: rgba(0,0,90,1); font-weight: bold;margin: 3px auto 3px auto; font-size:100%">THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS  AS IS  AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY.</span>
+<div style=" background-color: rgba( 51,122,183 , 0.2); margin: 3px auto 3px auto; width: 95% ; border-width: 0px 0px 0px 3px; border-color: rgba( 51,122,183 ,1); border-style: solid; padding: 1px 1px 1px 0px; border-radius: 0px 0px 5px 0px;"><b> &nbsp; <span style='font-size:110%;'> &#9749; </span><i> Important </i></b> <div style="background-color: rgba(255,255,255,0.75); padding: 10px 20px 10px 20px; border-radius: 0px 0px 5px 0px;">THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS  AS IS  AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY.</div></div>

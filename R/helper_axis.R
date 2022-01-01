@@ -85,6 +85,7 @@ trans_composition <- function( x=NULL, nb=30, brk=NA, dab=NA, dgrd=NA, dgrd2=NA 
 
   trans=identity_trans()
   trans$name='composition'
+  trans$brk=NA
   xl1=c();xb1=c();xl2=c();xb2=c()
   if(brk>=max(xb)){
     xl1=xb
@@ -229,6 +230,7 @@ trans_composition <- function( x=NULL, nb=30, brk=NA, dab=NA, dgrd=NA, dgrd2=NA 
     out1=labeling::extended(fxlmin, fxc, m=fm)
     out1
   }
+  trans$brk=max(trans$minor_breaks(trans$breaks(xb)))
   trans
 }
 
