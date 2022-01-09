@@ -7,17 +7,14 @@
 status](https://www.r-pkg.org/badges/version/mtb)](https://CRAN.R-project.org/package=mtb)
 [![Lifecycle:
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
-[![contributions
-welcome](man/figures/contributions-welcome-brightgreen.svg)](https://github.com/yh202109/mtb/issues)
 <!-- badges: end -->
 
-This package is one of the author’s weekend projects. The purpose of
-this package is to share a collection of functions for weekend kitchen
-and garden tasks, e.g. making plant growth charts or Thanksgiving oven
-timeline plot, etc. Functions might include but not limited to: (1)
-aiding summarizing time related data; (2) generating axis transformation
-from data; and (3) aiding `Markdown` (with `HTML` output) and `Shiny`
-files editing.
+The purpose of this package is to share a collection of functions the
+author wrote during weekends for managing kitchen and garden tasks,
+e.g. making plant growth charts or Thanksgiving kitchen schedule charts,
+etc. Functions might include but not limited to: (1) aiding summarizing
+time related data; (2) generating axis transformation from data; and (3)
+aiding `Markdown` (with `HTML` output) and `Shiny` files editing.
 
 ## Installation
 

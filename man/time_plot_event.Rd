@@ -14,6 +14,7 @@ time_plot_event(dt, xlab = "Time", anchor = TRUE, compact = FALSE)
   \item{start}{for starting time}
   \item{end}{for ending time with arrow head}
   \item{label}{for labeling the starting time}
+  \item{\code{labelend}}{for labeling the ending time of a interval}
   \item{type}{for event type as one of p (point), i (interval), b (box)}
 }}
 
@@ -35,7 +36,9 @@ dt = data.frame( id=paste('member',c(rep(c(1,2,3),each=3),3),sep=""),
 idn=c(rep(1,3),rep(-1,3), rep(2,4)),
 start=1800*c(0,1,2, 0.5, 1.2, 3, 1,2,3,4),
 end=1800*c(2,NA,3, 2, 6, NA, 2,2.5,3, 3.5),
-label=c(paste('event-',seq(1,10),sep='')), type=c('b', 'p', 'i','i','p','p','p','b','i','i' ) )
+label=c(paste('event-',seq(1,10),sep='')),
+labelend=c('','','?',')','','','','','>','X'),
+type=c('b', 'p', 'i','i','p','p','p','b','i','i' ) )
 time_plot_event( dt )
 
 }

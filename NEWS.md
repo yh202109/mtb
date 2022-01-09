@@ -1,13 +1,14 @@
-# mtb 0.1.4  
+# mtb 0.1.5  
 
 ## Major changes
 
+# pkg - Add site docs using `pkgdown`
 # axis - Add loglinear transformation
 # axis - Fix max unique values
 # axis - Fix min loglinear value
-# pkg - Add site docs using `pkgdown`
 # time - add event plot
 # time - add compact option
+# time - add end of interval options
 
 # mtb 0.1.1 (commit `42e8171`)
 

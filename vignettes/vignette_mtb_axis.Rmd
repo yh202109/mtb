@@ -36,7 +36,7 @@ Below is an example of using default linear scaled axis. The x values are select
 ```{r}
 library(mtb)
 library(ggplot2)
-pdt=data.frame(x=rep(c(0.5, 1, 10,11.5,17, 100, 300), each=5), gp=rep(seq(1,5),7))
+pdt=data.frame(x=rep(c(0.5, 1, 10,11.5,17, 100, 300), each=5), gp=factor(rep(seq(1,5),7)))
 pdt$y=log10(pdt$x)+rnorm(length(pdt$x))
 p=ggplot(pdt, aes(x=x, y=y, group=gp, color=gp))+geom_point()+geom_line()+
   ggtitle("Purple-Heirloom Tomato Growth Chart")
