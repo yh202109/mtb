@@ -31,6 +31,7 @@
 #'   \item{label}{for labeling the starting time}
 #'   \item{\code{labelend}}{for labeling the ending time of a interval}
 #'   \item{type}{for event type as one of p (point), i (interval), b (box)}
+#'   \item{color}{a string for event color}
 #' }
 #' @param xlab A string for the x-axis title
 #' @param anchor A Boolean value for the vertical lines linking \code{start} to the x-axis
@@ -46,7 +47,9 @@
 #' end=1800*c(2,NA,3, 2, 6, NA, 2,2.5,3, 3.5),
 #' label=c(paste('event-',seq(1,10),sep='')),
 #' labelend=c('','','?',')','','','','','>','X'),
-#' type=c('b', 'p', 'i','i','p','p','p','b','i','i' ) )
+#' type=c('b', 'p', 'i','i','p','p','p','b','i','i' ),
+#' color=c('stove', 'oven', 'oven','oven','stove','oven','oven','other','stove','oven' )
+#'  )
 #' time_plot_event( dt )
 #'
 #' @export
@@ -55,7 +58,7 @@ time_plot_event <- function( dt, xlab='Time', anchor=TRUE, compact=FALSE ){
   dt$start = mtb_dt_toPOSIXct(dt$start)
   dt$end = mtb_dt_toPOSIXct(dt$end)
   dt=dt[!is.na(dt$start),]
-  lstn1=c('id','idn','start','end','label','labelend','type')
+  lstn1=c('id','idn','start','end','label','labelend','type', 'color')
   lstn2=colnames(dt)
   if( length(intersect(lstn1, lstn2))!=length(lstn1) ){stop('There were missing columns')}
   dt2=unique(dt[,c('id','idn')])
@@ -93,8 +96,10 @@ time_plot_event <- function( dt, xlab='Time', anchor=TRUE, compact=FALSE ){
   yh=dt$yloc[c(diff(dt$idn)!=0, FALSE)]+0.5
   yl=aggregate(dt$yloc, list(dt$id), FUN=mean)
 
-  p = ggplot(dt)+ geom_hline(yintercept=yh)+xlab(xlab)+
-    theme(panel.grid.major.y=element_blank(), panel.grid.minor.y=element_blank(),
+  p = ggplot(dt, aes_string(color='color'))+ geom_hline(yintercept=yh)+xlab(xlab)+
+    theme(
+      panel.grid.major.y=element_blank(), panel.grid.minor.y=element_blank(),
+      panel.grid.major.x=element_blank(), panel.grid.minor.x=element_blank(),
           axis.ticks.y=element_blank(),axis.title.y=element_blank())+
     scale_y_continuous(breaks=yl$x, labels=yl$Group.1)
   if(anchor==TRUE){
@@ -102,10 +107,10 @@ time_plot_event <- function( dt, xlab='Time', anchor=TRUE, compact=FALSE ){
       geom_segment(dt,mapping=aes_string(x='start', xend='start', y='0', yend='yloc'), lwd=1, alpha=0.5, color='gray', lty=1)
   }
   if(sum(dt$type=='b')>0){
-    p=p+geom_rect(dt[dt$type=='b',],mapping=aes_string(xmin='start', xmax='end', ymin='yloc+0.25', ymax='yloc-0.25'), alpha=0.5, color='black', fill='gray', linejoin='round')
+    p=p+geom_rect(dt[dt$type=='b',],mapping=aes_string(xmin='start', xmax='end', ymin='yloc+0.25', ymax='yloc-0.25'), alpha=0.5, fill='gray', linejoin='round')
   }
   if(sum(dt$type=='i')>0){
-    p=p+geom_segment(dt[dt$type=='i',],mapping=aes_string(x='start', xend='end', y='yloc', yend='yloc'), lwd=3, alpha=0.5, color='darkgray')+
+    p=p+geom_segment(dt[dt$type=='i',],mapping=aes_string(x='start', xend='end', y='yloc', yend='yloc'), lwd=3, alpha=0.3)+
       geom_point(dt[dt$type=='i',],mapping=aes_string(x='start', y='yloc'), size=4, alpha=0.5)+
       geom_text(dt[dt$type=='i',],mapping=aes_string(x='end',y='yloc',label='paste(labelend)'), hjust=1, vjust=0.5, size=4, fontface='bold')
   }

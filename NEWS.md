@@ -9,6 +9,7 @@
 # time - add event plot
 # time - add compact option
 # time - add end of interval options
+# time - add color column
 
 # mtb 0.1.1 (commit `42e8171`)
 

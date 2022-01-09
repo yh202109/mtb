@@ -16,6 +16,7 @@ time_plot_event(dt, xlab = "Time", anchor = TRUE, compact = FALSE)
   \item{label}{for labeling the starting time}
   \item{\code{labelend}}{for labeling the ending time of a interval}
   \item{type}{for event type as one of p (point), i (interval), b (box)}
+  \item{color}{a string for event color}
 }}
 
 \item{xlab}{A string for the x-axis title}
@@ -38,7 +39,9 @@ start=1800*c(0,1,2, 0.5, 1.2, 3, 1,2,3,4),
 end=1800*c(2,NA,3, 2, 6, NA, 2,2.5,3, 3.5),
 label=c(paste('event-',seq(1,10),sep='')),
 labelend=c('','','?',')','','','','','>','X'),
-type=c('b', 'p', 'i','i','p','p','p','b','i','i' ) )
+type=c('b', 'p', 'i','i','p','p','p','b','i','i' ),
+color=c('stove', 'oven', 'oven','oven','stove','oven','oven','other','stove','oven' )
+ )
 time_plot_event( dt )
 
 }

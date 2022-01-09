@@ -27,11 +27,11 @@ test_that("function_dt_plot_period_1", {
 test_that("function_dt_plot_event_1", {
   suppressWarnings(library(ggplot2))
   dt = data.frame( id=paste('member',c(rep(c(1,2,3),each=3),3),sep=""), idn=c(rep(1,3),rep(-1,3), rep(2,4)), start=1800*c(0,1,2, 0.5, 1.2, 3, 1,2,3,4), end=1800*c(2,NA,3, 2, 6, NA, 2,3.5,3, 3.5),
-                   label=c(paste('event-',seq(1,10),sep='')), labelend=c(paste('end-',seq(1,10),sep='')), type=c('b', 'p', 'i','i','p','p','p','b','i','i' ) )
+                   label=c(paste('event-',seq(1,10),sep='')), labelend=c(paste('end-',seq(1,10),sep='')), color=rep('', 10), type=c('b', 'p', 'i','i','p','p','p','b','i','i' ) )
   p=time_plot_event( dt ) + xlab('Time')
 
-  expect_equal( names(p$data), c('id','start','end','label','labelend','type','idn','yloc','yloc2') )
-  expect_equal( names(p$labels), c('x','yintercept','y','xend','yend','xmin','xmax','ymin','ymax','label','hjust','vjust') )
+  expect_equal( names(p$data), c('id','start','end','label','labelend','color','type','idn','yloc','yloc2') )
+  expect_equal( names(p$labels), c('x','colour','yintercept','y','xend','yend','xmin','xmax','ymin','ymax','label','hjust','vjust') )
 })
 
 
