@@ -1,15 +1,22 @@
-# mtb 0.1.5  
+# mtb 0.1.6 (commit `TBA`)
 
 ## Major changes
 
-# pkg - Add site docs using `pkgdown`
-# axis - Add loglinear transformation
-# axis - Fix max unique values
-# axis - Fix min loglinear value
-# time - add event plot
-# time - add compact option
-# time - add end of interval options
-# time - add color column
+* axis - add demo to change line type in  line plots with trans axis
+* axis - add vignette to explain  
+
+# mtb 0.1.5 (commit `5a99717`)
+
+## Major changes
+
+* pkg - Add site docs using `pkgdown`
+* axis - Add loglinear transformation
+* axis - Fix max unique values
+* axis - Fix min loglinear value
+* time - add event plot
+* time - add compact option
+* time - add end of interval options
+* time - add color column
 
 # mtb 0.1.1 (commit `42e8171`)
 
