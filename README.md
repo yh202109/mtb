@@ -35,8 +35,8 @@ devtools::install_github('yh202109/mtb',ref='main')
 This is a basic example which shows you how to automatically select
 colors for individual groups by 3 major colors, blue, cyan and orange.
 The first argument represent group values. The second argument specify
-the order of *a* to *g*, the third argument specifies that group *a* is
-assigned to the black color, and group *b* is assigned to the gray
+the order of $a$ to $g$, the third argument specifies that group $a$ is
+assigned to the black color, and group $b$ is assigned to the gray
 color.
 
 ``` r

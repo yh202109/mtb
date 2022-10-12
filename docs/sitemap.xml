@@ -7,7 +7,25 @@
     <loc>https://yh202109.github.io/mtb/articles/index.html</loc>
   </url>
   <url>
+    <loc>https://yh202109.github.io/mtb/articles/mtb_axis.html</loc>
+  </url>
+  <url>
+    <loc>https://yh202109.github.io/mtb/articles/mtb_bill_summary.html</loc>
+  </url>
+  <url>
+    <loc>https://yh202109.github.io/mtb/articles/mtb_color.html</loc>
+  </url>
+  <url>
+    <loc>https://yh202109.github.io/mtb/articles/mtb_md.html</loc>
+  </url>
+  <url>
+    <loc>https://yh202109.github.io/mtb/articles/mtb_timerelated.html</loc>
+  </url>
+  <url>
     <loc>https://yh202109.github.io/mtb/articles/vignette_mtb_axis.html</loc>
+  </url>
+  <url>
+    <loc>https://yh202109.github.io/mtb/articles/vignette_mtb_bill_summary.html</loc>
   </url>
   <url>
     <loc>https://yh202109.github.io/mtb/articles/vignette_mtb_color.html</loc>
@@ -37,10 +55,16 @@
     <loc>https://yh202109.github.io/mtb/reference/add_colored_str.html</loc>
   </url>
   <url>
+    <loc>https://yh202109.github.io/mtb/reference/bill_cross_count.html</loc>
+  </url>
+  <url>
     <loc>https://yh202109.github.io/mtb/reference/color_set_palette.html</loc>
   </url>
   <url>
     <loc>https://yh202109.github.io/mtb/reference/color_test_palette.html</loc>
+  </url>
+  <url>
+    <loc>https://yh202109.github.io/mtb/reference/exdt.html</loc>
   </url>
   <url>
     <loc>https://yh202109.github.io/mtb/reference/index.html</loc>

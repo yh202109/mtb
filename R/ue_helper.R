@@ -18,8 +18,50 @@
 NULL
 
 ############################################################
-mtb_cleanupstr <- function(str = "") {
-  trimws(gsub("[^a-zA-Z0-9()<>=,._;!@#$%&+\\*/-]", " ", str), which = c("both"), whitespace = "[ \t\r\n]")
+mtb_cleanupstr <- function(str = "", len=NA) {
+  x=as.character(str[1])
+  if(is.null(x)){x=""}
+  if(!is.character(x)){x=""}
+  #out=trimws(gsub("[^a-zA-Z0-9,._%/]", "_", x), which=c('both'),whitespace='[ \t\r\n]')
+  out=trimws(gsub("[^a-zA-Z0-9()<>=,._;!@#$%&+\\*/-]", " ", str), which = c("both"), whitespace = "[ \t\r\n]")
+  len=as.numeric(len)
+  if(!is.na(len)){ if(length(out)>len) {out=substr(out,1,len)}}
+  out
+}
+
+mtb_cleanupname=function(str="", len=NA){
+  x=as.character(str[1])
+  if(is.null(x)){x=""}
+  if(!is.character(x)){x=""}
+  if(x==""){x=as.character(as.numeric(Sys.time()))}
+  out=trimws(gsub("[^a-zA-Z0-9-]", "_", x), which=c('both'),whitespace='[ \t\r\n]')
+  len=as.numeric(len)
+  if(!is.na(len)){out=substr(out,1,len)}
+  out
+}
+mtb_cleanupaddr=function(str=""){
+  x=as.character(str[1])
+  if(is.null(x)){x=""}
+  if(!is.character(x)){x=""}
+  trimws(gsub("[^a-zA-Z0-9:_/.\\-]", " ", x), which=c('both'),whitespace='[ \t\r\n]')
+}
+mtb_to_backslash=function(str=""){
+  x=as.character(str[1])
+  if(is.null(x)){x=""}
+  if(!is.character(x)){x=""}
+  gsub('/','\\',x,fixed=TRUE)
+}
+mtb_to_slash=function(str=""){
+  x=as.character(str[1])
+  if(is.null(x)){x=""}
+  if(!is.character(x)){x=""}
+  gsub('\\','/',x,fixed=TRUE)
+}
+mtb_get_addr_tail=function(str="", sep='/'){
+  x=as.character(str[1])
+  if(is.null(x)){x=""}
+  out=gregexpr(paste0('[^',sep,']*$'), x)[[1]]
+  if(attr(out,'match.length')<nchar(x)){return(substr(x,out[1],out[1]+attr(out,'match.length')))}else{return("")}
 }
 
 ############################################################
@@ -100,3 +142,7 @@ mtb_dt_toPOSIXct = function(str, origin='1970-01-01 00:00:00'){
   }
   tstr
 }
+
+############################################################
+mtb_col_in_dt = function(col, dt){ sum(col==colnames(dt))==1 }
+mtb_col_in_ldt = function(col, ldt){ sum(sapply(seq(1,length(ldt)), FUN=function(x){mtb_col_in_dt(col, dt=ldt[[x]]) })!=1)==0 }

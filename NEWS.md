@@ -1,4 +1,12 @@
-# mtb 0.1.6 (commit `TBA`)
+# mtb 0.1.7 (commit `TBA`)
+
+## Major changes
+
+* text - add length restriction option
+* text - add functions for name, address, and slashes
+* bill - add cross comparison between multiple bill table
+
+# mtb 0.1.6 (commit `d7b8929`)
 
 ## Major changes
 

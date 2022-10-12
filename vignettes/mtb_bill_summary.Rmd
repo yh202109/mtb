@@ -1,0 +1,63 @@
+---
+title: "mtb: Summary from Multiple Tables"
+author: "Y. Hsu"
+date: '`r Sys.Date()`'
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{mtb: Summary from Multiple Tables}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(mtb)
+```
+
+## Background
+
+Assume that for each month, items purchased in each grocery store visit 
+are recorded in a table.
+At the end of a year, we may want to generate a summary table that shows 
+how many times each item being purchased over the year and 
+also list some summary statistics.
+
+## How to use
+
+This is a basic example which shows you how to summarize item frequency
+from multiple tables.
+
+```{r example_1}
+library(mtb)
+head(exdt[[1]])
+```
+
+This is a basic example which shows you how to create a cross-count table: 
+
+```{r example_2}
+
+head(bill_cross_count(exdt[1:6], id='name', gp=c('category1'), type = 'count' ) )
+
+```
+
+This is a basic example which shows you how to create a cross-count table with conditions: 
+
+```{r example_3}
+
+head(bill_cross_count(exdt[1:6], id='name', gp=c('category1'), type = 'cond', condstr='store==2' ) )
+
+```
+
+This is a basic example which shows you how to create a cross-count table with conditions and total: 
+
+```{r example_4}
+
+head(bill_cross_count(exdt[1:6], id='name', gp=c('category1'), type = 'condwt', condstr='store==1' ) )
+
+```

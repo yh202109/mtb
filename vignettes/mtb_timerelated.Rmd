@@ -1,10 +1,10 @@
 ---
-title: "vignette_mtb_time_related"
+title: "mtb: Time Related Plots"
 author: "Y. Hsu"
 date: '`r Sys.Date()`'
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{vignette_mtb_time_related}
+  %\VignetteIndexEntry{mtb: Time Related Plots}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -54,13 +54,13 @@ label=c('Turkey', 'Watch Temp', 'Gravy', 'Stuffing', 'Whipped Cream', 'Cookie', 
 dt[1:5,]
 ```
 
-```{r}
+```{r, fig.width=7}
 time_plot_event( dt ) 
 ```
 
 Note that the `compact` option can reduce the use of vertical spaces.
 However,  to avoid reversed interval like `event-10`, the input data set should have start time < end time.
 
-```{r}
+```{r, fig.width=7}
 time_plot_event( dt, compact=TRUE )
 ```

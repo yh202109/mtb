@@ -1,10 +1,10 @@
 ---
-title: "vignette_mtb_markdown"
+title: "mtb: Edit Markdown"
 author: "Y. Hsu"
 date: '`r Sys.Date()`'
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{vignette_mtb_markdown}
+  %\VignetteIndexEntry{mtb: Edit Markdown}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

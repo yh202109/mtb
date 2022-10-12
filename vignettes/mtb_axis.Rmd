@@ -1,10 +1,10 @@
 ---
-title: "vignette_mtb_axis"
+title: "mtb: Change Axis"
 author: "Y. Hsu"
 date: '`r Sys.Date()`'
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{vignette_axis}
+  %\VignetteIndexEntry{mtb: Change Axis}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
