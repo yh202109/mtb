@@ -1,7 +1,7 @@
 Package: mtb
 Type: Package
 Title: My Toolbox for Assisting Document Editing and Data Presenting
-Version: 0.1.7
+Version: 0.1.8
 Authors@R: c(
     person("Y", "Hsu", email="yh202109@gmail.com", role=c('aut','cre'))
     )

@@ -27,3 +27,14 @@ test_that("cross_summary1", {
   expect_equal(bill_cross_count(ldt2, 'col1', type='condwt') , NULL )
 
 })
+
+test_that("cross_summary2", {
+
+  dt1=data.frame(col1=c(1,2,3,3), col2=c('a','b','c','c'), col3=c('-','=','+','-'))
+  dt2=data.frame(col1=c(1,2,3), col2=c('a','b','c'), col3=c('-','=','+'))
+  expect_equal(as.numeric(bill_cross_check(dt1,dt2, id=c('col1','col2'), chk='col3')[1,'same']), 1)
+  expect_equal(as.numeric(bill_cross_check(dt1,dt2, id=c('col1','col2'), chk=NULL)[1,'same']), 1)
+  expect_error(bill_cross_check(dt1,dt2, id=c('col1','col2'), chk='a'), 'chk should be a column name', fixed=TRUE)
+  expect_error(bill_cross_check(dt1,dt2, id=c('col1','col2'), chk=NA), 'chk should be a column name', fixed=TRUE)
+
+})

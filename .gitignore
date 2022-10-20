@@ -1,7 +1,6 @@
 .Rproj.user
 .Rbuildignore
 .Rprofile
-cran-comments.md
 .Rhistory
 .RData
 .Ruserdata
@@ -11,6 +10,11 @@ inst/doc
 /doc/
 /Meta/
 vignettes/.gitignore
+.github/.gitignore
+.gitignore
+.github
 mtb.Rproj
 CRAN-RELEASE
+CRAN-SUBMISSION
 _pkgdown.yml
+cran-comments.md

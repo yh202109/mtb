@@ -61,3 +61,12 @@ This is a basic example which shows you how to create a cross-count table with c
 head(bill_cross_count(exdt[1:6], id='name', gp=c('category1'), type = 'condwt', condstr='store==1' ) )
 
 ```
+
+This is a basic example which shows you how to cross-check differences in two table: 
+
+```{r example_5}
+
+head(bill_cross_check(exdt[[1]], exdt[[2]], id=c('category1', 'name','store') ) )
+
+```
+

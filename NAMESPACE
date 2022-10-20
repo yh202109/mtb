@@ -2,6 +2,7 @@
 
 export(add_colored_box)
 export(add_colored_str)
+export(bill_cross_check)
 export(bill_cross_count)
 export(color_set_palette)
 export(color_test_palette)

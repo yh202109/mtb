@@ -18,7 +18,7 @@ bill_cross_count(
 
 \item{id}{A column name}
 
-\item{gp}{A column name}
+\item{gp}{A column name or a vector of column names}
 
 \item{type}{A string in one of the following:
 \itemize{
@@ -33,7 +33,7 @@ bill_cross_count(
 a data.table
 }
 \description{
-\code{bill_summary} returns a data.table showing how many times each
+\code{bill_cross_count} returns a data.table showing how many times each
 items being listed on individual bills.
 }
 \examples{
