@@ -7,8 +7,7 @@
 status](https://www.r-pkg.org/badges/version/mtb)](https://CRAN.R-project.org/package=mtb)
 [![Lifecycle:
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
-[![metacran
-downloads](https://cranlogs.r-pkg.org/badges/month/mtb)](https://cran.r-project.org/package=mtb)
+[![](https://cranlogs.r-pkg.org/badges/mtb)](https://cran.rstudio.com/web/packages/mtb/index.html)  
 <!-- badges: end -->
 
 The purpose of this package is to share a collection of functions the
