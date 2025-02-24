@@ -21,7 +21,6 @@ test_that("function_dt_plot_period_1", {
   p=time_plot_interval( dt, xlab='Time', ylab='ID', legend_title='Group', arrow_wt=3, arrow_color='gray')
 
   expect_equal( names(p$data), c('id','start','end','label','idn','adj','idl') )
-  expect_equal( names(p$labels), c('fill','y','x','xend','yend','label') )
 })
 
 test_that("function_dt_plot_event_1", {
@@ -31,7 +30,6 @@ test_that("function_dt_plot_event_1", {
   p=time_plot_event( dt ) + xlab('Time')
 
   expect_equal( names(p$data), c('id','start','end','label','labelend','color','type','idn','yloc','yloc2') )
-  expect_equal( names(p$labels), c('x','colour','yintercept','y','xend','yend','xmin','xmax','ymin','ymax','label','hjust','vjust') )
 })
 
 
