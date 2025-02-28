@@ -1,5 +1,5 @@
-pandoc: '2.18'
-pkgdown: 2.0.6
+pandoc: '3.2'
+pkgdown: 2.1.1
 pkgdown_sha: ~
 articles:
   mtb_axis: mtb_axis.html
@@ -7,8 +7,7 @@ articles:
   mtb_color: mtb_color.html
   mtb_md: mtb_md.html
   mtb_timerelated: mtb_timerelated.html
-last_built: 2022-10-20T14:16Z
+last_built: 2025-02-28T01:34Z
 urls:
   reference: https://yh202109.github.io/mtb/reference
   article: https://yh202109.github.io/mtb/articles
-

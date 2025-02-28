@@ -23,13 +23,13 @@
 #' @importFrom stats aggregate
 #'
 #' @param dt a \code{data.frame} with the following columns
-#' \itemize{
+#' \describe{
 #'   \item{id}{for ID of each group}
-#'   \item{\code{idn}}{for order of ID}
+#'   \item{idn}{for order of ID}
 #'   \item{start}{for starting time}
 #'   \item{end}{for ending time with arrow head}
 #'   \item{label}{for labeling the starting time}
-#'   \item{\code{labelend}}{for labeling the ending time of a interval}
+#'   \item{labelend}{for labeling the ending time of a interval}
 #'   \item{type}{for event type as one of p (point), i (interval), b (box)}
 #'   \item{color}{a string for event color}
 #' }

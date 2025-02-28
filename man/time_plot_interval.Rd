@@ -15,9 +15,9 @@ time_plot_interval(
 }
 \arguments{
 \item{dt}{a \code{data.frame} with the following columns
-\itemize{
+\describe{
   \item{id}{for ID of each interval}
-  \item{\code{idn}}{for order of ID}
+  \item{idn}{for order of ID}
   \item{start}{for starting time}
   \item{end}{for ending time with arrow head}
   \item{label}{for labeling the starting time}
