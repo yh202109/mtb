@@ -1,4 +1,11 @@
-# mtb 0.1.8 (commit `TBA`)
+# mtb 0.1.9 (commit `TBA`)
+
+## Major changes
+
+* merge test pr for ggplot compatability 
+* fix notes from devtools::check()
+
+# mtb 0.1.8 (commit `cf78b1d`)
 
 ## Major changes
 
