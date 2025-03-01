@@ -3,8 +3,8 @@ Type: Package
 Title: My Toolbox for Assisting Document Editing and Data Presenting
 Version: 0.1.9
 Authors@R: c(
-    person("Y", "Hsu", email="yh202109@gmail.com", role=c('aut','cre'))
-    )
+    person("Y", "Hsu", , "yh202109@gmail.com", role = c("aut", "cre"))
+  )
 Description: 
     The purpose of this package is to share a collection of functions the author wrote during weekends for managing
     kitchen and garden tasks, e.g. making plant growth charts or Thanksgiving kitchen schedule charts, etc. 
