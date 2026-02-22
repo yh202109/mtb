@@ -20,6 +20,7 @@
 #' Create a plot for events with labels
 #'
 #' @importFrom ggplot2 ggplot aes geom_segment geom_label xlab ylab arrow labs geom_rect geom_hline geom_vline theme element_blank geom_text geom_point coord_flip
+#' @importFrom rlang .data
 #' @importFrom stats aggregate
 #'
 #' @param dt a \code{data.frame} with the following columns
@@ -61,6 +62,11 @@ time_plot_event <- function( dt, xlab='Time', anchor=TRUE, compact=FALSE ){
   lstn1=c('id','idn','start','end','label','labelend','type', 'color')
   lstn2=colnames(dt)
   if( length(intersect(lstn1, lstn2))!=length(lstn1) ){stop('There were missing columns')}
+  dt2=unique(dt[,c('id','idn')])    
+  dt=dt[!is.na(dt$start),]
+  lstn1=c('id','idn','start','end','label','labelend','type', 'color')
+  lstn2=colnames(dt)
+  if( length(intersect(lstn1, lstn2))!=length(lstn1) ){stop('There were missing columns')}
   dt2=unique(dt[,c('id','idn')])
   if(dim(dt2)[1] != length(unique(dt2$id)) | dim(dt2)[1] != length(unique(dt2$id))){dt2$idn=as.numeric(as.factor(dt2$id));dt2=unique(dt2)}
   dt2=dt2[order(dt2$idn, decreasing=TRUE),]
@@ -96,28 +102,28 @@ time_plot_event <- function( dt, xlab='Time', anchor=TRUE, compact=FALSE ){
   yh=dt$yloc[c(diff(dt$idn)!=0, FALSE)]+0.5
   yl=aggregate(dt$yloc, list(dt$id), FUN=mean)
 
-  p = ggplot(dt, aes_string(color='color'))+ geom_hline(yintercept=yh)+xlab(xlab)+
+  p = ggplot(dt, aes(color=.data[["color"]]))+ geom_hline(yintercept=yh)+xlab(xlab)+
     theme(
       panel.grid.major.y=element_blank(), panel.grid.minor.y=element_blank(),
       panel.grid.major.x=element_blank(), panel.grid.minor.x=element_blank(),
           axis.ticks.y=element_blank(),axis.title.y=element_blank())+
     scale_y_continuous(breaks=yl$x, labels=yl$Group.1)
   if(anchor==TRUE){
-    p=p+geom_point(aes_string(x='start', y='0'), alpha=0.7)+
-      geom_segment(dt,mapping=aes_string(x='start', xend='start', y='0', yend='yloc'), lwd=1, alpha=0.5, color='gray', lty=1)
+    p=p+geom_point(aes(x=.data[["start"]], y=0), alpha=0.7)+
+      geom_segment(dt,mapping=aes(x=.data[["start"]], xend=.data[["start"]], y=0, yend=.data[["yloc"]]), lwd=1, alpha=0.5, color='gray', lty=1)
   }
   if(sum(dt$type=='b')>0){
-    p=p+geom_rect(dt[dt$type=='b',],mapping=aes_string(xmin='start', xmax='end', ymin='yloc+0.25', ymax='yloc-0.25'), alpha=0.5, fill='gray', linejoin='round')
+    p=p+geom_rect(dt[dt$type=='b',],mapping=aes(xmin=.data[["start"]], xmax=.data[["end"]], ymin=.data[["yloc"]]+0.25, ymax=.data[["yloc"]]-0.25), alpha=0.5, fill='gray', linejoin='round')
   }
   if(sum(dt$type=='i')>0){
-    p=p+geom_segment(dt[dt$type=='i',],mapping=aes_string(x='start', xend='end', y='yloc', yend='yloc'), lwd=3, alpha=0.3)+
-      geom_point(dt[dt$type=='i',],mapping=aes_string(x='start', y='yloc'), size=4, alpha=0.5)+
-      geom_text(dt[dt$type=='i',],mapping=aes_string(x='end',y='yloc',label='paste(labelend)'), hjust=1, vjust=0.5, size=4, fontface='bold')
+    p=p+geom_segment(dt[dt$type=='i',],mapping=aes(x=.data[["start"]], xend=.data[["end"]], y=.data[["yloc"]], yend=.data[["yloc"]]), lwd=3, alpha=0.3)+
+      geom_point(dt[dt$type=='i',],mapping=aes(x=.data[["start"]], y=.data[["yloc"]]), size=4, alpha=0.5)+
+      geom_text(dt[dt$type=='i',],mapping=aes(x=.data[["end"]], y=.data[["yloc"]], label=paste(.data[["labelend"]])), hjust=1, vjust=0.5, size=4, fontface='bold')
   }
   if(sum(dt$type=='p')>0){
-    p=p+geom_point(dt[dt$type=='p',],mapping=aes_string(x='start', y='yloc'), alpha=0.7, size=4)
+    p=p+geom_point(dt[dt$type=='p',],mapping=aes(x=.data[["start"]], y=.data[["yloc"]]), alpha=0.7, size=4)
   }
-  p+geom_text(aes_string(x='start',y='yloc2',label='paste(" ",label)', hjust=0, vjust=0))
+  p+geom_text(aes(x=.data[["start"]], y=.data[["yloc2"]], label=paste(" ", .data[["label"]]), hjust=0, vjust=0))
 }
 
 

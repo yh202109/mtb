@@ -21,8 +21,8 @@
 #' The return can be used with function \code{ggplot::scale_x_continuous()}
 #' or \code{ggplot::scale_y_continuous()} to create a desired axis.
 #'
-#' @importFrom scales identity_trans
-#' @importFrom stats approx quantile approxfun
+#' @importFrom scales new_transform
+#' @importFrom stats approx quantile
 #' @importFrom labeling extended
 #'
 #' @param x A numerical vector used in a plot as (typically) \code{x}
@@ -63,14 +63,14 @@
 trans_composition <- function( x=NULL, nb=30, brk=NA, dab=NA, dgrd=NA, dgrd2=NA ){
   if(is.null(x)|missing(x)){stop('x should be a numerical vector')}
   xori=as.numeric(x)
-  if(sum(is.na(xori))>0){stop('x is should not included NAs')}
+  if(sum(is.na(xori))>0){stop('x should not include NAs')}
   if(typeof(x)!='double'|length(xori)<2){stop('x should be a numerical vector')}
   if(is.null(nb)|missing(nb)){nb=NA}
   nb=as.numeric(nb)
   if(is.na(nb)|length(nb)!=1){nb=30}
   xb=unique(xori)
   xb=xb[order(xb)]
-  xnb=length(nb)
+  xnb=length(xb)
   if(xnb>nb){stop('x has more distinct values than nb')}
   if(is.null(brk)|missing(brk)){brk=max(xori)+1}
   brk=as.numeric(brk)
@@ -83,7 +83,7 @@ trans_composition <- function( x=NULL, nb=30, brk=NA, dab=NA, dgrd=NA, dgrd2=NA 
   if(is.null(dgrd2)|missing(dgrd2)){dgrd2=NA}
   if(is.na(dgrd2)|length(dgrd2)!=1){if(brk>min(xori)){dgrd2=((min(max(xori),brk)-min(xori))/48)}else{dgrd2=((max(xori)-min(xori))/48)}}
 
-  trans=identity_trans()
+  trans=new_transform("identity", transform=identity, inverse=identity)
   trans$name='composition'
   trans$brk=NA
   xl1=c();xb1=c();xl2=c();xb2=c()

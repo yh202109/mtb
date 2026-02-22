@@ -20,14 +20,14 @@ knitr::opts_chunk$set(
 
 The purpose of this package is to share a collection of functions the author wrote during weekends for managing
 kitchen and garden tasks, e.g. making plant growth charts or Thanksgiving kitchen schedule charts, etc. 
-Functions might include but not limited to:
-(1) aiding summarizing time related data; 
-(2) generating axis transformation from data; and
-(3) aiding `Markdown` (with `HTML` output) and `Shiny` files editing.
+Functions may include but are not limited to:
+(1) aiding in summarizing time-related data; 
+(2) generating axis transformations from data; and
+(3) aiding `Markdown` (with `HTML` output) and `Shiny` file editing.
 
 ## Installation
 
-You can install the newest version of mtb like so:
+You can install the latest version of mtb like so:
 
 ``` r
 install.packages('mtb')
@@ -41,7 +41,7 @@ devtools::install_github('yh202109/mtb',ref='main')
 
 ## Example - Selecting and Testing Colors
 
-This is a basic example which shows you how to automatically select colors for individual groups by 3 major colors, blue, cyan and orange. The first argument represent group values. The second argument specify the order of $a$ to $g$, the third argument specifies that group $a$ is assigned to the black color, and group $b$ is assigned to the gray color.  
+This is a basic example which shows you how to automatically select colors for individual groups by 3 major colors, blue, cyan and orange. The first argument represents group values. The second argument specify the order of $a$ to $g$, the third argument specifies that group $a$ is assigned to the black color, and group $b$ is assigned to the gray color.  
 
 ```{r example_color_1}
 library(mtb)
@@ -72,6 +72,21 @@ This is an example which shows you how to add a warning box:
 
 ```{r example_rmd_3}
 add_colored_box(type='yellow-warning', info='Here is the warning message.')
+```
+
+## Example - Crosstab Summary
+
+This is a basic example which shows you how to generate a crosstab from a data frame with row-wise percentages:
+
+```{r example_crosstab_1}
+df <- data.frame(
+    A = c('foo','foo','foo','foo','foo','foo','bar','bar','baz','baz','baz'),
+    D = c('apple','apple','apple','apple','banana','apple','banana','apple','banana','apple','banana'),
+    E = c('red','blue','red','red','red','blue','blue','red','blue','red','blue')
+)
+result <- crosstab_from_list(df, rows=c("A"), cols=c("D","E"),
+                             perct_within_index="A", report_type=1)
+result$report
 ```
 
 # Warranty and Disclaimer

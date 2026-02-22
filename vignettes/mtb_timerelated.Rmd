@@ -59,7 +59,7 @@ time_plot_event( dt )
 ```
 
 Note that the `compact` option can reduce the use of vertical spaces.
-However,  to avoid reversed interval like `event-10`, the input data set should have start time < end time.
+However, to avoid reversed interval like `event-10`, the input data set should have start time < end time.
 
 ```{r, fig.width=7}
 time_plot_event( dt, compact=TRUE )

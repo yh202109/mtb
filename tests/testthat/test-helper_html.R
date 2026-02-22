@@ -34,6 +34,23 @@ test_that("function_add_colored_str_3", {
   )
 })
 
+test_that("function_add_colored_str - output class is shiny.tag", {
+  out <- add_colored_str("hello", color="red")
+  expect_s3_class(out, "shiny.tag")
+})
+
+test_that("function_add_colored_str - bold and italic flags applied", {
+  out_bold   <- add_colored_str("test", bold=TRUE)
+  out_italic <- add_colored_str("test", it=TRUE)
+  expect_true(grepl("font-weight: bold", as.character(out_bold)))
+  expect_true(grepl("font-style: italic", as.character(out_italic)))
+})
+
+test_that("function_add_colored_str - named color string accepted", {
+  expect_no_error(add_colored_str("test", color="red"))
+  expect_no_error(add_colored_str("test", color="#FF0000"))
+})
+
 ############################################################
 
 test_that("function_add_colored_box_1", {
@@ -53,6 +70,22 @@ test_that("function_add_colored_box_3", {
     suppressWarnings(add_colored_box(type=NULL, label=NULL, info=c(1,2,3), bgcolor=c(1,2,3), width=2, halign='r', top=TRUE )),
     htmltools::tags$div(HTML("<b> &nbsp; <span style='font-size:110%;'> &#9749; </span><i> Note </i></b> <div style=\"background-color: rgba(255,255,255,0.75); padding: 10px 20px 10px 20px; border-radius: 0px 0px 5px 0px;\"></div>"), style = "position: absolute; right:0; top:0; background-color: rgba( 1,2,3 , 0.2); margin: 3px auto 3px auto; width: 35% ; border-width: 0px 0px 0px 3px; border-color: rgba( 1,2,3 ,1); border-style: solid; padding: 1px 1px 1px 0px; border-radius: 0px 0px 5px 0px;")
   )
+})
+
+test_that("function_add_colored_box - output class is shiny.tag", {
+  out <- add_colored_box(type='blue-default', info='test')
+  expect_s3_class(out, "shiny.tag")
+})
+
+test_that("function_add_colored_box - valid types do not error", {
+  for (t in c('blue-default','blue-info','gray-info','green-reminder','yellow-warning','red-stop')) {
+    expect_no_error(add_colored_box(type=t, info='test'))
+  }
+})
+
+test_that("function_add_colored_box - label override works", {
+  out <- add_colored_box(type='blue-default', label='Custom Label', info='msg')
+  expect_true(grepl("Custom Label", as.character(out)))
 })
 
 

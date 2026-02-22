@@ -19,7 +19,8 @@
 #' @description
 #' Create a plot for event periods by ID
 #'
-#' @importFrom ggplot2 ggplot aes geom_segment geom_label xlab ylab arrow labs scale_y_continuous aes_string
+#' @importFrom ggplot2 ggplot aes geom_segment geom_label xlab ylab arrow labs scale_y_continuous
+#' @importFrom rlang .data
 #'
 #' @param dt a \code{data.frame} with the following columns
 #' \describe{
@@ -64,9 +65,9 @@ time_plot_interval <- function( dt, xlab='DateTime', ylab='ID', legend_title='Gr
     if(dt$id[idx]==dt$id[idx-1] & (dt$start[idx]<dt$end[idx-1] | (dt$end[idx]<max(dt$start[idx-1],dt$end[idx-1])&dt$end[idx]>min(dt$start[idx-1],dt$end[idx-1])) )){ dt$adj[idx]=dt$adj[idx-1]+1 }
   }
   dt$idl = dt$idn + dt$adj*0.5/(1+max(dt$adj))
-  p = ggplot(dt, aes_string(x='start', y='idl'))+geom_segment(aes_string(x='start', y='idl', xend='end',yend='idl'), arrow=arrow(), size=arrow_wt, colour=mtb_color2rgb(arrow_color,totri=FALSE),alpha=0.7)
+  p = ggplot(dt, aes(x=.data[["start"]], y=.data[["idl"]]))+geom_segment(aes(x=.data[["start"]], y=.data[["idl"]], xend=.data[["end"]], yend=.data[["idl"]]), arrow=arrow(), linewidth=arrow_wt, colour=mtb_color2rgb(arrow_color,totri=FALSE),alpha=0.7)
   p = p + scale_y_continuous(breaks=dt$idn, labels=dt$id)
-  p = p + geom_label(aes_string(x='start', y='idl', label='label', fill='label'), alpha=0.5)
+  p = p + geom_label(aes(x=.data[["start"]], y=.data[["idl"]], label=.data[["label"]], fill=.data[["label"]]), alpha=0.5)
   p = p + xlab(xlab) + ylab(ylab) + labs(fill=legend_title)
   p
 }

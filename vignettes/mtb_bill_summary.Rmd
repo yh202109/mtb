@@ -62,7 +62,7 @@ head(bill_cross_count(exdt[1:6], id='name', gp=c('category1'), type = 'condwt', 
 
 ```
 
-This is a basic example which shows you how to cross-check differences in two table: 
+This is a basic example which shows you how to cross-check differences between two tables: 
 
 ```{r example_5}
 

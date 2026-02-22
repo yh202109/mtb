@@ -2,7 +2,7 @@
 % Please edit documentation in R/helper_bill_crosscompare.R
 \name{bill_cross_count}
 \alias{bill_cross_count}
-\title{Summarize times being purchased for individual items'
+\title{Summarize times being purchased for individual items
  from multiple grocery shopping lists.}
 \usage{
 bill_cross_count(

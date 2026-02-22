@@ -20,19 +20,19 @@ knitr::opts_chunk$set(
 knitr::opts_chunk$set(tidy=FALSE, comment='#>',fig.align='center', fig.width = 7)
 ```
 
-## Background - Why using data derived axis transformation
+## Background - Why Use a Data-Derived Axis Transformation
 
-For continuous $x$ values, the common options for the $x$-axis scale could be either linear or log.  Assume that the $x$ vector has a smaller number of distinct values. Some of those $x$ values could be clustered tightly while others are far away from the cluster. In such case, the plot could have an area that is overfilled and have other areas that are underused. 
+For continuous $x$ values, the common options for the $x$-axis scale could be either linear or log.  Assume that the $x$ vector has a smaller number of distinct values. Some of those $x$ values could be clustered tightly while others are far away from the cluster. In such cases, the plot could have an area that is overfilled and have other areas that are underused. 
 
 The function `trans_composition()` yields linear scale for $x$-axis below a breaking point. All unique $x$ values above the breaking point will be plotted in equal spaces in between. The function `trans_loglinear()` is based on an algorithm derived log transformation such that the $x$ values could be spaced out for easier interpreting.
 
-`r mtb::add_colored_str('Caution - The use of nonlinear axis scale can be DISTORTION and MISLEADING. The use of transformed scales should be **clearly noted** in the text or on the figure to avoid misleading.', color='red')`
+`r mtb::add_colored_str('Caution - The use of nonlinear axis scale can be DISTORTING and MISLEADING. The use of transformed scales should be **clearly noted** in the text or on the figure to avoid misleading.', color='red')`
 
 These transformations can work with `position_dodge()` and other adjustments.
 
 ## How to use
 
-Below is an example of using default linear scaled axis. The x values are selected to demonstrate the situation that $x$ values are clustered at the lower side. As shown in the figure below, the details near $x<15$ are hard to be seen.
+Below is an example of using default linear scaled axis. The x values are selected to demonstrate the situation that $x$ values are clustered at the lower side. As shown in the figure below, the details near $x<15$ are hard to see.
 
 
 ```{r}
@@ -47,7 +47,7 @@ p
 
 Below is an example that shows how to use `trans_composition()` with break point set as 50. 
 Distinct $x$ values above 50 are plotted with equal spaces in between. 
-While using non-linear transformed X-axis, it gives a distort sense regarding distances between the last two measured time points. In addition to that, the long distance between the last three $x$ values makes the linear connections between observations less certain, but the connections are still needed to identify individual groups. 
+While using non-linear transformed X-axis, it gives a distorted sense regarding distances between the last two measured time points. In addition to that, the long distance between the last three $x$ values makes the linear connections between observations less certain, but the connections are still needed to identify individual groups. 
 The example below used dashed line above x=17 to have clearer indication of the change of scales. 
 
 ```{r}
@@ -82,7 +82,7 @@ p4=ggplot(pdt, aes(x=x, y=y, group=gp, color=gp))+geom_point()+
 p4+ scale_x_continuous(trans=t)+geom_text( x=-Inf, y=Inf, hjust=0, vjust=1, label='Caution: X-axis scale is not linear', color='red')
 ```
 
-In some line plots, a straight line between two points is used to indicate that these two points are observations corresponding to the same group. Those straight lines are not necessarily indicate or hint linear trends between points. Also note that, for plots based on log scales, a straight line on a log-scale plot is a convex curve on a linear-scale plot.  
+In some line plots, a straight line between two points is used to indicate that these two points are observations corresponding to the same group. Those straight lines do not necessarily indicate or imply linear trends between points. Also note that, for plots based on log scales, a straight line on a log-scale plot is a convex curve on a linear-scale plot.  
 
 
 

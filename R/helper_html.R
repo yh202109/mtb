@@ -38,7 +38,7 @@
 #' @param bgalpha An integer between 1 and 255 for background alpha. default=51.
 #' @param fontsize A real number between 0.5 and 5.0 for font size. default=1.
 #' @param bold A logical value for bold fonts. default=\code{FALSE}.
-#' @param it A Boolean value for italic fonts. default=\code{FALSE}.
+#' @param it A logical value for italic fonts. default=\code{FALSE}.
 #'
 #' @return a formatted string
 #'
@@ -102,7 +102,7 @@ add_colored_str <- function(text = "",
 #'  \item 'blue-default' for a steel-blue box
 #'  \item 'gray-info' for a gray box
 #'  \item 'blue-info' for a blue box
-#'  \item 'green-remainder' for a green box
+#'  \item 'green-reminder' for a green box
 #'  \item 'yellow-warning' for a yellow box
 #'  \item 'red-stop' for a red box
 #' }
@@ -126,6 +126,8 @@ add_colored_str <- function(text = "",
 #'   \item \code{FALSE} for inline
 #'   \item \code{TRUE} for top-of-page
 #' }
+#'
+#' @return A formatted \code{htmltools} tag object.
 #'
 #' @examples
 #' add_colored_box( type='blue-default', info='the document include information regarding...')

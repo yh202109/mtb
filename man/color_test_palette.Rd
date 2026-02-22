@@ -12,7 +12,7 @@ color_test_palette(colvect = c(), type = "line")
 \item{type}{One of
 \itemize{
   \item 'line' for using the color vector on a line plot (Default)
-  \item 'box' for using the color vector on a box plot.
+  \item 'bar' for using the color vector on a bar plot.
 }}
 }
 \value{

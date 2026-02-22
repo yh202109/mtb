@@ -36,19 +36,33 @@ test_that("function_color_set_palette_3", {
   )
 })
 
-############################################################
-
-if(FALSE){
-test_that("function_color_test_palette_1", {
-  colvect = setNames( c("#000000","#0000FF","#5537AA","#AA6E55","#FFA500"), c('a','b','c','d','e') )
-  p =  suppressWarnings(color_test_palette(colvect, type='bar'))
-
-  expect_equal(
-    p,
-    barplot(rep(1,5), axes=FALSE, space=0, col=colvect, names.arg = names(colvect))
-  )
+test_that("function_color_set_palette - gray9 assignment", {
+  out <- suppressWarnings(color_set_palette(c('a','b','c'), c(1,2,3),
+                                            cols=c('blue'), black='a', gray9='b'))
+  expect_equal(unname(out["a"]), "#000000")
+  expect_equal(unname(out["b"]), "#999999")
 })
-}
+
+test_that("function_color_set_palette - color ramp when more groups than cols", {
+  # 5 groups but only 2 cols after reserving black/gray9: triggers colorRamp
+  out <- suppressWarnings(color_set_palette(c('a','b','c','d','e','f'), NULL,
+                                            cols=c('blue','orange'), black='a', gray9='b'))
+  expect_equal(length(out), 6)
+  expect_type(out, "character")
+  expect_true(all(grepl("^#[0-9A-Fa-f]{6}$", out)))
+})
+
+test_that("function_color_set_palette - empty vect returns empty", {
+  expect_equal(suppressWarnings(color_set_palette(c())), c())
+})
+
+test_that("function_color_set_palette - returns named vector", {
+  out <- suppressWarnings(color_set_palette(c('x','y'), c(1,2), cols=c('red','blue')))
+  expect_named(out)
+  expect_true(all(c('x','y') %in% names(out)))
+})
+
+############################################################
 
 test_that("function_color_test_palette_2", {
   expect_equal(
@@ -57,18 +71,18 @@ test_that("function_color_test_palette_2", {
   )
 })
 
-if(FALSE){
-test_that("function_color_test_palette_3", {
-  colvect = setNames( c("#000000","#0000FF","#FFA500"), c('a','b','c') )
-  x = seq(-3,3,0.1)
-  expect_equal(
-    suppressWarnings(color_test_palette(colvect, type='line')),
-    {
-      plot( x, y=dnorm(x, 0, 1), type='b', frame=FALSE, col=colvect[1], xlab='x', ylab='y')
-      lines( x, dnorm(x, 0, 1.5), type='b', lty=2, col=colvect[2])
-      lines( x, dnorm(x, 0, 2), type='b', lty=3, col=colvect[3])
-      legend('topleft', legend=names(colvect), col=colvect, lty=c(1,2,3))
-    }
-  )
+test_that("function_color_test_palette - type=bar does not error", {
+  colvect <- setNames(c("#000000","#0000FF","#FFA500"), c('a','b','c'))
+  expect_no_error(suppressWarnings(color_test_palette(colvect, type='bar')))
 })
-}
+
+test_that("function_color_test_palette - type=line does not error", {
+  colvect <- setNames(c("#000000","#0000FF","#FFA500"), c('a','b','c'))
+  expect_no_error(suppressWarnings(color_test_palette(colvect, type='line')))
+})
+
+test_that("function_color_test_palette - unknown type returns NULL with warning", {
+  colvect <- setNames(c("#FF0000"), c('a'))
+  expect_warning(out <- color_test_palette(colvect, type='unknown'))
+  expect_null(out)
+})

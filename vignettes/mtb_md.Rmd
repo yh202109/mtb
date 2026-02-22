@@ -23,9 +23,9 @@ library(mtb)
 ## Background
 
 R Markdown has been popular in many communities for presenting and sharing results. 
-These formatting functions help to emphasis a sentence, or a paragraph.
-`add_colored_str()` adds an inline string with customized styles, including, color, background color and size.
-`add_colored_box()` adds a colored area with title to emphasis a reminder, or a warning.
+These formatting functions help to emphasize a sentence, or a paragraph.
+`add_colored_str()` adds an inline string with customized styles, including color, background color, and size.
+`add_colored_box()` adds a colored area with a title to emphasize a reminder, or a warning.
 
 ## How to use
 

@@ -17,11 +17,11 @@
 #' Transformation for continuous data with a finite number of distinct values
 #'
 #' @description
-#' \code{trans_loglinear()} derives a log transformation from a numerical vector with a smaller number (ideally < 30) of distinct values..
+#' \code{trans_loglinear()} derives a log transformation from a numerical vector with a smaller number (ideally < 30) of distinct values.
 #' The return can be used with function \code{ggplot::scale_x_continuous()}
 #' or \code{ggplot::scale_y_continuous()} to create a desired axis.
 #'
-#' @importFrom scales log_trans trans_new log_breaks identity_trans
+#' @importFrom scales new_transform
 #' @importFrom stats quantile
 #' @importFrom labeling extended
 #'
@@ -57,7 +57,7 @@
 trans_loglinear <- function( x=NULL, nb=30, int=NA, scale=NA, mindist=0.03 ){
   if(is.null(x)|missing(x)){stop('x should be a numerical vector')}
   xori=as.numeric(x)
-  if(sum(is.na(xori))>0){stop('x is should not included NAs')}
+  if(sum(is.na(xori))>0){stop('x should not include NAs')}
   if(typeof(x)!='double'|length(xori)<2){stop('x should be a numerical vector')}
   int=as.numeric(int)
   scale=as.numeric(scale)
@@ -79,7 +79,7 @@ trans_loglinear <- function( x=NULL, nb=30, int=NA, scale=NA, mindist=0.03 ){
     if(dx[4]-dx[3]<=dx[2]-dx[1]|min(diff(dx))==0){int=NA; scale=NA
     }else{scale=(dx[2]+dx[3]-dx[1]-dx[4])/(dx[1]*dx[4]-dx[2]*dx[3]); if(scale<=0){scale=NA;int=NA}else{int=base/(dx[1]*scale+1); scale=int*scale}}
   }else{if(int<0|scale<=0){scale=NA;int=NA}}
-  if(is.na(int)){ return(identity_trans()) }
+  if(is.na(int)){ return(new_transform("identity", transform=identity, inverse=identity)) }
   trans=function(x)log(int+scale*x,base)
   inv=function(x) (base^x-int)/scale
   breaks=function(x, n = 30){
@@ -132,6 +132,6 @@ trans_loglinear <- function( x=NULL, nb=30, int=NA, scale=NA, mindist=0.03 ){
     out1=out1[out1>0]
     trans(out1)
   }
-  trans_new('loglinear', trans, inv, breaks=breaks, minor_breaks=minor_breaks, domain=c(1e-100,Inf))
+  new_transform('loglinear', transform=trans, inverse=inv, breaks=breaks, minor_breaks=minor_breaks, domain=c(1e-100,Inf))
 }
 

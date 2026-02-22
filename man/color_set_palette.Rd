@@ -32,7 +32,7 @@ color_set_palette(
 a named vector
 }
 \description{
-Create a list of colors for a data vector by a list major colors.
+Create a list of colors for a data vector by a list of major colors.
 }
 \examples{
 color_set_palette( c('apple', 'orange', 'lime', 'apple'), c(2,1,3,2), 'red', 'blue')

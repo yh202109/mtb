@@ -33,7 +33,7 @@ trans_loglinear(x = NULL, nb = 30, int = NA, scale = NA, mindist = 0.03)
 A transformation function
 }
 \description{
-\code{trans_loglinear()} derives a log transformation from a numerical vector with a smaller number (ideally < 30) of distinct values..
+\code{trans_loglinear()} derives a log transformation from a numerical vector with a smaller number (ideally < 30) of distinct values.
 The return can be used with function \code{ggplot::scale_x_continuous()}
 or \code{ggplot::scale_y_continuous()} to create a desired axis.
 }

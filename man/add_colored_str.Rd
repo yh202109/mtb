@@ -40,7 +40,7 @@ add_colored_str(
 
 \item{bold}{A logical value for bold fonts. default=\code{FALSE}.}
 
-\item{it}{A Boolean value for italic fonts. default=\code{FALSE}.}
+\item{it}{A logical value for italic fonts. default=\code{FALSE}.}
 }
 \value{
 a formatted string

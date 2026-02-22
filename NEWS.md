@@ -1,8 +1,21 @@
+# mtb 0.1.10 (commit `TBA`)
+
+## Major changes
+
+* cd - add `crosstab_from_list()` for crosstab generation with optional within-group percentages
+* cd - add vignette and tests for `crosstab_from_list()`
+* axis - fix `xnb=length(nb)` bug in `trans_composition()` (distinct-value guard was never triggered)
+* axis - replace deprecated `scales` functions (`identity_trans`, `trans_new`) with `new_transform()`
+* axis - remove unused imports (`approxfun`, `log_trans`, `log_breaks`)
+* axis - fix NA error message typo; add input validation tests
+* time - replace deprecated `aes_string()` calls with `aes(.data[[...]])` in time plot functions
+* docs - fix typos and grammar in vignettes
+
 # mtb 0.1.9 (commit `TBA`)
 
 ## Major changes
 
-* merge test pr for ggplot compatability 
+* merge test pr for ggplot compatibility
 * fix notes from devtools::check()
 
 # mtb 0.1.8 (commit `cf78b1d`)
@@ -24,7 +37,7 @@
 ## Major changes
 
 * axis - add demo to change line type in  line plots with trans axis
-* axis - add vignette to explain  
+* axis - add vignette to explain
 
 # mtb 0.1.5 (commit `5a99717`)
 

@@ -18,7 +18,7 @@
 .datatable.aware=TRUE
 tmp=""
 utils::globalVariables(c("."))
-#' Summarize times being purchased for individual items'
+#' Summarize times being purchased for individual items
 #'  from multiple grocery shopping lists.
 #'
 #' \code{bill_cross_count} returns a data.table showing how many times each

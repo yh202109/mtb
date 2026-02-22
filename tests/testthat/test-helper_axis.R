@@ -88,6 +88,75 @@ test_that("function_trans_composition_3", {
 })
 
 
+test_that("function_trans_composition_input_validation", {
+  # null / missing x
+  expect_error(trans_composition(NULL),          'x should be a numerical vector', fixed=TRUE)
+  expect_error(suppressWarnings(trans_composition(c("a","b","c"))), 'x should not include NAs', fixed=TRUE)
+  expect_error(trans_composition(as.double(1)),   'x should be a numerical vector', fixed=TRUE)
+
+  # NAs in x
+  expect_error(trans_composition(as.double(c(1, NA, 3))), 'x should not include NAs', fixed=TRUE)
+
+  # nb limit (verifies the xnb=length(xb) bug fix)
+  expect_error(
+    trans_composition(as.double(c(1,2,3,4,5,6)), nb=3),
+    'x has more distinct values than nb', fixed=TRUE
+  )
+
+  # nb limit not triggered when distinct values <= nb
+  expect_no_error(trans_composition(as.double(rep(c(1,2,3), each=5)), nb=3))
+})
+
+test_that("function_trans_loglinear_input_validation", {
+  # null / missing x
+  expect_error(trans_loglinear(NULL),            'x should be a numerical vector', fixed=TRUE)
+  expect_error(trans_loglinear(as.double(1)),     'x should be a numerical vector', fixed=TRUE)
+  expect_error(suppressWarnings(trans_loglinear(c("a","b","c"))),   'x should not include NAs',   fixed=TRUE)
+
+  # NAs in x
+  expect_error(trans_loglinear(as.double(c(1, NA, 3))), 'x should not include NAs', fixed=TRUE)
+
+  # nb limit
+  expect_error(
+    trans_loglinear(as.double(c(1,2,3,4,5,6)), nb=3),
+    'x has more distinct values than nb', fixed=TRUE
+  )
+})
+
+test_that("function_trans_loglinear_identity_fallback", {
+  # Uniformly spaced data does not fit log shape -> identity transform returned
+  t_id <- trans_loglinear(as.double(c(1,2,3,4,5,6,7)))
+  expect_equal(t_id$name, "identity")
+
+  # int < 0 with explicit params -> identity fallback
+  t_bad <- trans_loglinear(as.double(rep(c(0.5,1,10,100,1000), each=3)), int=-1, scale=0.01)
+  expect_equal(t_bad$name, "identity")
+
+  # scale <= 0 with explicit params -> identity fallback
+  t_bad2 <- trans_loglinear(as.double(rep(c(0.5,1,10,100,1000), each=3)), int=1, scale=-1)
+  expect_equal(t_bad2$name, "identity")
+})
+
+test_that("function_trans_loglinear_explicit_params", {
+  x <- as.double(rep(c(0.5, 1, 10, 100, 1000), each=5))
+  t <- trans_loglinear(x, int=1, scale=0.01)
+  expect_equal(t$name, "loglinear")
+
+  # transform and inverse are consistent (round-trip)
+  vals <- c(1, 10, 100)
+  expect_equal(round(t$inverse(t$transform(vals)), 6), vals)
+})
+
+test_that("function_trans_loglinear_mindist_clamping", {
+  x <- as.double(rep(c(0.5, 1, 10, 100, 1000), each=5))
+  # mindist > 0.2 is clamped to 0.2 (no error)
+  expect_no_error(trans_loglinear(x, mindist=0.9))
+  # mindist < 0 is clamped to 0 (no error)
+  expect_no_error(trans_loglinear(x, mindist=-1))
+  # NA mindist defaults to 0.03 (no error)
+  expect_no_error(trans_loglinear(x, mindist=NA))
+})
+
 test_that("function_trans_loglinear_1", {
   pdt=data.frame(x=rep(c(0.5, 1, 10,11,12, 100, 1000), each=5), x2=rep(c(NA, Inf, 10,11,12, 100, 1000), each=5))
   pdt$y=pdt$x+rnorm(length(pdt$x))

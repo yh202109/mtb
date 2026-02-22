@@ -16,7 +16,8 @@
 ############################################################
 #' Generate a color vector
 #'
-#' Create a list of colors for a data vector by a list major colors.
+#' @description
+#' Create a list of colors for a data vector by a list of major colors.
 #'
 #' @importFrom grDevices colorRamp colors rgb
 #'
@@ -76,6 +77,7 @@ color_set_palette = function( vect=c(), vectn=c(), cols=c('blue','cyan','darkora
 ############################################################
 #' Test a color vector
 #'
+#' @description
 #' Create a figure using the assigned color vector
 #'
 #' @importFrom graphics barplot plot lines
@@ -85,7 +87,7 @@ color_set_palette = function( vect=c(), vectn=c(), cols=c('blue','cyan','darkora
 #' @param type One of
 #' \itemize{
 #'   \item 'line' for using the color vector on a line plot (Default)
-#'   \item 'box' for using the color vector on a box plot.
+#'   \item 'bar' for using the color vector on a bar plot.
 #' }
 #'
 #' @return A plot

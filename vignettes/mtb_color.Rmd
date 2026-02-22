@@ -22,8 +22,8 @@ library(mtb)
 
 ## Background
 
-The section of colors are flexible and convenient using functions like `grDevices::colorRamp()`, or `grDevices::rainbow()`. 
-There are situations that we need to reserve some colors for some specific groups, and control the mapping of color and group values. `color_set_palette()` generate a list of color by taking group values and allows two reserved colors.
+The selection of colors is flexible and convenient using functions like `grDevices::colorRamp()`, or `grDevices::rainbow()`. 
+There are situations where we need to reserve some colors for specific groups and control the mapping of colors to group values. `color_set_palette()` generates a list of colors by taking group values and allows two reserved colors.
 `color_test_palette()` shows selected palette on two different formats (bar or line) to visually inspect the color selection.
 
 ## How to use

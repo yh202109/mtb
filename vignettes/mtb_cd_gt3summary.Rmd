@@ -1,0 +1,119 @@
+---
+title: "mtb: Crosstab Summary with crosstab_from_list()"
+author: "Y. Hsu"
+date: '`r Sys.Date()`'
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{mtb: Crosstab Summary}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(mtb)
+library(knitr)
+```
+
+## Background
+
+[[Link to Python version of the same function](https://yh202109.github.io/mtbp3cd/cd_gt03_util_summary.html)]
+
+`crosstab_from_list()` produces a contingency table (crosstab) from a data
+frame, supporting multi-column row and column keys. When `perct_within_index`
+is supplied, within-group percentages are computed alongside the raw counts.
+
+The function returns a named list:
+
+- **`count`** — raw counts with `All` margin row and column
+- **`percent`** — within-group percentages (or `NULL` if no `perct_within_index`)
+- **`report`** — formatted strings combining counts and percentages (or `NULL`)
+- **`total`** — group totals used for percentage calculation (or `NULL`)
+
+## Example data
+
+```{r example-data}
+df <- data.frame(
+    A = c('foo','foo', 'foo', 'foo', 'foo', 'foo', 'bar', 'bar', 'baz', 'baz', 'baz'),
+    B = c('one','one','one','one', 'one', 'two', 'two', 'one', 'one', 'two', 'two'),
+    C = c('y','x','x','x', 'y', 'x', 'y', 'x', 'y', 'x', 'y'),
+    D = c('apple','apple','apple','apple', 'banana', 'apple', 
+          'banana', 'apple', 'banana', 'apple', 'banana'),
+    E = c('red','blue','red','red', 'red', 'blue', 'blue', 'red', 'blue', 'red', 'blue'),
+    value = c(0,1,1,1, 2, 3, 4, 5, 6, 7, 8)
+)
+```
+
+The data has `r nrow(df)` rows and `r ncol(df)` columns. Columns `A`, `B`, `C`
+will serve as row keys and `D`, `E` as column keys.
+
+## Basic crosstab (counts only)
+
+When `perct_within_index` is `NULL`, only the count table is populated.
+
+```{r example-count}
+result_count <- crosstab_from_list(
+    df   = df,
+    rows = c("A", "B", "C"),
+    cols = c("D", "E")
+)
+kable(result_count$count)
+```
+
+## Crosstab with row-wise percentages
+
+Setting `perct_within_index = "A"` computes percentages within each level of
+column `A` (a row-key variable), so each row's counts sum to 100% within its
+group.
+
+```{r example-report-type1}
+result <- crosstab_from_list(
+    df                 = df,
+    rows               = c("A", "B", "C"),
+    cols               = c("D", "E"),
+    perct_within_index = "A",
+    col_margin_perct   = TRUE,
+    row_margin_perct   = TRUE,
+    report_type        = 1
+)
+kable(result$report)
+```
+
+## report_type = 2: showing count/total
+
+Using `report_type = 2` formats each cell as `count/total (percent%)` instead,
+making the denominator explicit.
+
+```{r example-report-type2}
+result2 <- crosstab_from_list(
+    df                 = df,
+    rows               = c("A", "B", "C"),
+    cols               = c("D", "E"),
+    perct_within_index = "A",
+    col_margin_perct   = TRUE,
+    row_margin_perct   = TRUE,
+    report_type        = 2
+)
+kable(result2$report)
+```
+
+## Accessing individual components
+
+The four list elements can be accessed independently:
+
+```{r example-components}
+# Raw counts
+kable(result$count)
+
+# Percentages
+kable(result$percent)
+
+# Group totals
+kable(result$total)
+```

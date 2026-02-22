@@ -12,13 +12,14 @@ experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](h
 The purpose of this package is to share a collection of functions the
 author wrote during weekends for managing kitchen and garden tasks,
 e.g. making plant growth charts or Thanksgiving kitchen schedule charts,
-etc. Functions might include but not limited to: (1) aiding summarizing
-time related data; (2) generating axis transformation from data; and (3)
-aiding `Markdown` (with `HTML` output) and `Shiny` files editing.
+etc. Functions may include but are not limited to: (1) aiding in
+summarizing time-related data; (2) generating axis transformations from
+data; and (3) aiding `Markdown` (with `HTML` output) and `Shiny` file
+editing.
 
 ## Installation
 
-You can install the newest version of mtb like so:
+You can install the latest version of mtb like so:
 
 ``` r
 install.packages('mtb')
@@ -34,7 +35,7 @@ devtools::install_github('yh202109/mtb',ref='main')
 
 This is a basic example which shows you how to automatically select
 colors for individual groups by 3 major colors, blue, cyan and orange.
-The first argument represent group values. The second argument specify
+The first argument represents group values. The second argument specify
 the order of $a$ to $g$, the third argument specifies that group $a$ is
 assigned to the black color, and group $b$ is assigned to the gray
 color.
@@ -51,13 +52,13 @@ colors:
 color_test_palette(colvect, type='line')
 ```
 
-<img src="man/figures/README-example_color_2-1.png" width="60%" />
+<img src="man/figures/README-example_color_2-1.png" alt="" width="60%" />
 
 ``` r
 color_test_palette(colvect, type='bar')
 ```
 
-<img src="man/figures/README-example_color_2-2.png" width="60%" />
+<img src="man/figures/README-example_color_2-2.png" alt="" width="60%" />
 
 ## Example - *R markdown* or *Shiny* components
 
@@ -84,6 +85,27 @@ add_colored_box(type='yellow-warning', info='Here is the warning message.')
 ```
 
 <div style=" background-color: rgba( 230,200,60 , 0.2); margin: 3px auto 3px auto; width: 50% ; border-width: 0px 0px 0px 3px; border-color: rgba( 230,200,60 ,1); border-style: solid; padding: 1px 1px 1px 0px; border-radius: 0px 0px 5px 0px;"><b> &nbsp; <span style='font-size:110%;'> &#9888; </span><i> Warning </i></b> <div style="background-color: rgba(255,255,255,0.75); padding: 10px 20px 10px 20px; border-radius: 0px 0px 5px 0px;">Here is the warning message.</div></div>
+
+## Example - Crosstab Summary
+
+This is a basic example which shows you how to generate a crosstab from
+a data frame with row-wise percentages:
+
+``` r
+df <- data.frame(
+    A = c('foo','foo','foo','foo','foo','foo','bar','bar','baz','baz','baz'),
+    D = c('apple','apple','apple','apple','banana','apple','banana','apple','banana','apple','banana'),
+    E = c('red','blue','red','red','red','blue','blue','red','blue','red','blue')
+)
+result <- crosstab_from_list(df, rows=c("A"), cols=c("D","E"),
+                             perct_within_index="A", report_type=1)
+result$report
+#>     A apple | blue banana | blue apple | red banana | red       All
+#> 1 bar       0 (0%)       1 (50%)     1 (50%)       0 (0%)  2 (100%)
+#> 2 baz       0 (0%)     2 (66.7%)   1 (33.3%)       0 (0%)  3 (100%)
+#> 3 foo    2 (33.3%)        0 (0%)     3 (50%)    1 (16.7%)  6 (100%)
+#> 4 All    2 (18.2%)     3 (27.3%)   5 (45.5%)     1 (9.1%) 11 (100%)
+```
 
 # Warranty and Disclaimer
 
