@@ -157,23 +157,34 @@ crosstab_from_list <- function(df, rows, cols, perct_within_index=NULL, col_marg
 
         n_data_rows <- nrow(ct1) - 1L  # exclude All row
 
+        data_idx <- seq_len(n_data_rows)  # row indices excluding the All margin row
+
         if (length(idx_names) > 0 && length(col_names) == 0) {
-            # Percent within each row group
-            for (i in 1:nrow(ct1)) {
-                total <- sum(ct1[i, setdiff(count_cols, "All")])
+            # Percent within groups defined by the unique combination of idx_names columns.
+            # All rows sharing the same idx_names values share the same denominator.
+            grp_keys <- do.call(paste, c(ct1[data_idx, idx_names, drop=FALSE], sep="\t"))
+            for (i in seq_len(nrow(ct1))) {
+                if (i > n_data_rows) {
+                    # All margin row: denominator is grand total of data counts
+                    total <- sum(ct1[data_idx, setdiff(count_cols, "All")])
+                } else {
+                    key_i <- paste(ct1[i, idx_names], collapse="\t")
+                    grp_rows <- data_idx[grp_keys == key_i]
+                    total <- sum(ct1[grp_rows, setdiff(count_cols, "All")])
+                }
                 ct_total[i, count_cols] <- total
                 ct_perc[i, count_cols]  <- round(100 * ct1[i, count_cols] / total, 1)
             }
         } else if (length(col_names) > 0 && length(idx_names) == 0) {
             # Percent within each column group
             for (j in count_cols) {
-                total <- sum(ct1[seq_len(n_data_rows), j])
+                total <- sum(ct1[data_idx, j])
                 ct_total[, j] <- total
                 ct_perc[, j]  <- round(100 * ct1[, j] / total, 1)
             }
         } else if (length(idx_names) > 0 && length(col_names) > 0) {
             # Grand total
-            total <- sum(ct1[seq_len(n_data_rows), setdiff(count_cols, "All")])
+            total <- sum(ct1[data_idx, setdiff(count_cols, "All")])
             ct_total[, count_cols] <- total
             ct_perc[, count_cols]  <- round(100 * ct1[, count_cols] / total, 1)
         }

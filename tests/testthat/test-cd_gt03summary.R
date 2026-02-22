@@ -82,14 +82,18 @@ test_that("crosstab_from_list multi-column row and col keys", {
     expect_true(all(grepl(" | ", non_all_cols, fixed=TRUE)))
 })
 
-test_that("crosstab_from_list percent within row index sums to 100", {
+test_that("crosstab_from_list percent within row index sums to 100 per group", {
     result <- crosstab_from_list(df, rows=c("A","B","C"), cols=c("D","E"),
                                  perct_within_index="A")
     pct <- result$percent
     expect_false(is.null(pct))
-    # Each non-All row's "All" column should be 100
+    # For each unique value of A, the sum of the "All" column across
+    # rows with that A value should equal 100
     non_all_rows <- which(pct[["A"]] != "All")
-    expect_true(all(pct$All[non_all_rows] == 100))
+    for (a_val in unique(pct[["A"]][non_all_rows])) {
+        grp_rows <- which(pct[["A"]] == a_val)
+        expect_equal(sum(pct$All[grp_rows]), 100, tolerance=0.5)
+    }
 })
 
 test_that("crosstab_from_list percent within col index sums to 100", {
@@ -122,6 +126,53 @@ test_that("crosstab_from_list report_type=2 formats correctly", {
     # Count columns should match "N/T (P%)" pattern
     count_cols <- setdiff(names(rpt), "A")
     expect_true(all(grepl("^[0-9]+/[0-9]+ \\([0-9.]+%\\)$", as.matrix(rpt[, count_cols]))))
+})
+
+test_that("crosstab_from_list perct_within_index multi-column group sums to 100", {
+    result <- crosstab_from_list(df, rows=c("A","B","C"), cols=c("D","E"),
+                                 perct_within_index=c("A","B"), report_type=1)
+    pct <- result$percent
+    expect_false(is.null(pct))
+
+    # For each unique (A, B) combination, the sum of the "All" column across
+    # rows with that (A, B) value should equal 100 (within rounding tolerance)
+    non_all_rows <- which(pct[["A"]] != "All")
+    grp_keys <- paste(pct[["A"]][non_all_rows], pct[["B"]][non_all_rows], sep="\t")
+    for (key in unique(grp_keys)) {
+        grp_rows <- non_all_rows[grp_keys == key]
+        expect_equal(sum(pct$All[grp_rows]), 100, tolerance=0.5,
+                     label=paste("group", key))
+    }
+})
+
+test_that("crosstab_from_list perct_within_index multi-column group denominators are correct", {
+    result <- crosstab_from_list(df, rows=c("A","B","C"), cols=c("D","E"),
+                                 perct_within_index=c("A","B"), report_type=1)
+    pct   <- result$percent
+    ct    <- result$count
+    total <- result$total
+
+    # foo|one has 5 records (rows 6 and 7); denominator should be 5
+    foo_one_rows <- which(ct[["A"]] == "foo" & ct[["B"]] == "one")
+    expect_true(all(total$All[foo_one_rows] == 5))
+
+    # baz|two has 2 records (rows 4 and 5); denominator should be 2
+    baz_two_rows <- which(ct[["A"]] == "baz" & ct[["B"]] == "two")
+    expect_true(all(total$All[baz_two_rows] == 2))
+
+    # bar|one has 1 record; that row should show 100% in the All column
+    bar_one_rows <- which(pct[["A"]] == "bar" & pct[["B"]] == "one")
+    expect_equal(pct$All[bar_one_rows], 100)
+})
+
+test_that("crosstab_from_list perct_within_index multi-column report_type=2 format", {
+    result <- crosstab_from_list(df, rows=c("A","B","C"), cols=c("D","E"),
+                                 perct_within_index=c("A","B"), report_type=2)
+    rpt <- result$report
+    expect_s3_class(rpt, "data.frame")
+    count_cols <- setdiff(names(rpt), c("A","B","C"))
+    expect_true(all(grepl("^[0-9]+/[0-9]+ \\([0-9.]+%\\)$",
+                          as.matrix(rpt[, count_cols]))))
 })
 
 test_that("crosstab_from_list rows are sorted alphabetically", {
